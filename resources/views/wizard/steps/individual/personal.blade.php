@@ -14,7 +14,7 @@
 
     <div class="col-12 col-sm-6">
         <label for="website" class="form-label">{{ __('Website') }}</label>
-        <input type="url" class="form-control" id="website" name="website"
+        <input type="url" class="form-control" disabled id="website" name="website"
             placeholder="https://" value="{{ old('website', $data['website'] ?? '') }}">
     </div>
 
