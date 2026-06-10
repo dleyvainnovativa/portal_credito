@@ -220,10 +220,17 @@ class ContisignSubmissionService
         $signer = $cfg['signer'];
 
         if ($signer === 'client') {
-            $contact = $payload['contact'] ?? [];
-            $name  = trim(($contact['first_name'] ?? '') . ' ' . ($contact['last_name'] ?? ''));
-            $email = $contact['email'] ?? '';
-            $phone = $contact['phone'] ?? '';
+            if ($payload["applicant_type"] == "company") {
+                $contact = $payload['representative'] ?? [];
+                $name  = trim(($contact['first_name'] ?? '') . ' ' . ($contact['last_name'] ?? ''));
+                $email = $contact['email'] ?? '';
+                $phone = $contact['phone'] ?? '';
+            } else {
+                $contact = $payload['contact'] ?? [];
+                $name  = trim(($contact['first_name'] ?? '') . ' ' . ($contact['last_name'] ?? ''));
+                $email = $contact['email'] ?? '';
+                $phone = $contact['phone'] ?? '';
+            }
         } else {
             $name  = $signer['name'] ?? '';
             $email = $signer['email'] ?? '';

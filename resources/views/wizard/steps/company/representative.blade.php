@@ -6,7 +6,7 @@
 
 <div class="row g-3 mb-4">
     <div class="col-12 col-sm-6">
-        <label for="rep_first_name" class="form-label">Nombre del Representante<span class="ob-req">*</span></label>
+        <label for="rep_first_name" class="form-label">{{ __('First Name(s)') }}<span class="ob-req">*</span></label>
         <input type="text" class="form-control" id="rep_first_name" name="rep_first_name"
             value="{{ old('rep_first_name', $data['rep_first_name'] ?? '') }}" required>
     </div>
@@ -31,6 +31,11 @@
             value="{{ old('rep_phone', $data['rep_phone'] ?? '') }}" required>
     </div>
     <div class="col-12 col-sm-6">
+        <label for="rep_phone_confirmation" class="form-label">{{ __('Confirm Phone Number') }}<span class="ob-req">*</span></label>
+        <input type="tel" class="form-control input-mono" id="rep_phone_confirmation"
+            name="rep_phone_confirmation" value="{{ old('rep_phone_confirmation') }}" required>
+    </div>
+    <div class="col-12 col-sm-6">
         <label for="rep_dob" class="form-label">{{ __('Date of Birth') }}<span class="ob-req">*</span></label>
         <input type="date" class="form-control" id="rep_dob" name="rep_dob"
             value="{{ old('rep_dob', $data['rep_dob'] ?? '') }}" required>
@@ -38,7 +43,7 @@
 </div>
 
 <fieldset class="mb-3">
-    <legend class="form-label d-block mb-2">Tipo de Identificación (del Representante) <span class="ob-req">*</span></legend>
+    <legend class="form-label d-block mb-2">{{ __('Identification Type') }}<span class="ob-req">*</span></legend>
     <div class="btn-group flex-wrap" role="group" aria-label="{{ __('Identification Type') }}">
         @foreach (['ine' => __('INE'), 'passport' => __('Passport'), 'immigration' => __('Immigration Document')] as $val => $text)
         <input type="radio" class="btn-check" name="id_type" id="id_type_{{ $val }}"

@@ -24,7 +24,7 @@ class RepresentativeRequest extends StepRequest
             'rep_first_name' => ['required', 'string', 'max:120'],
             'rep_last_name'  => ['required', 'string', 'max:120'],
             'rep_email'      => ['required', 'email', 'max:255', 'confirmed'],
-            'rep_phone'      => ['required', 'string', 'regex:/^[\d\s\-\+\(\)]{7,20}$/'],
+            'rep_phone'      => ['required', 'string', 'regex:/^[\d\s\-\+\(\)]{7,20}$/', 'confirmed'],
             'rep_dob'        => ['required', 'date', 'before:today'],
 
             'id_type' => ['required', Rule::in(['ine', 'passport', 'immigration'])],

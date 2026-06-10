@@ -37,6 +37,8 @@
     "We could not submit your application. Please try again.": "No pudimos enviar su solicitud. Intente de nuevo.",
     "Try again": "Intentar de nuevo",
     "Confirm Phone Number": "Confirmar Número de Teléfono",
+    "Your Executive's Email": "Mail de su Ejecutivo (Sistemas Contino)",
+    "Individual's Name": "Nombre de la Persona Física",
     "How to sign the document?": "¿Cómo firmar el documento?",
     "Close": "Cerrar",
     "parts": "partes",
@@ -46,9 +48,8 @@
     "Unsupported file type. Allowed: PDF, JPG, PNG.": "Tipo de archivo no permitido. Permitidos: PDF, JPG, PNG.",
     "This file exceeds the :mb MB limit and could not be split automatically. Please upload a smaller file.": "Este archivo supera el límite de :mb MB y no se pudo dividir automáticamente. Cargue un archivo más pequeño.",
 
-
     "Personal Info": "Información Personal",
-    "Address": "Domicilio Fiscal",
+    "Address": "Dirección",
     "ID & Documents": "Identificación y Documentos",
     "Primary Contact": "Contacto Principal",
     "References": "Referencias",
@@ -61,7 +62,7 @@
 
     "Website": "Sitio Web",
     "13 characters for individuals.": "13 caracteres para personas físicas.",
-    "First Name(s)": "Nombre(s)",
+    "First Name(s)": "Nombre",
     "Last Name(s)": "Apellido(s)",
     "Street and Number": "Calle y Número",
     "Postal Code": "Código Postal",
@@ -88,7 +89,7 @@
     "Already uploaded": "Ya cargado",
     "Replace": "Reemplazar",
 
-    "Sales Representative Email": "Mail de Contacto de su Ejecutivo (Sistemas Contino)",
+    "Sales Representative Email": "Correo del Representante de Ventas",
     "Email Address": "Correo Electrónico",
     "Confirm Email Address": "Confirmar Correo Electrónico",
     "Phone Number": "Número de Teléfono",

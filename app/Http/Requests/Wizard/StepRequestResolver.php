@@ -31,7 +31,7 @@ class StepRequestResolver
         'company.address'           => Shared\AddressRequest::class,
         'company.documents'         => Company\DocumentsRequest::class,
         'company.representative'    => Company\RepresentativeRequest::class,
-        'company.contact'           => Shared\ContactRequest::class,
+        'company.contact'           => Company\ContactRequest::class,
         'company.references'        => Shared\ReferencesRequest::class,
         'company.authorization'     => Shared\AuthorizationRequest::class,
         'company.review'            => null,
