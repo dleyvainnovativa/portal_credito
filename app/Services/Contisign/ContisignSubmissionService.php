@@ -79,14 +79,13 @@ class ContisignSubmissionService
         $mapped   = $this->mapper->map($templateKey, $payload);
         $template = $mapped['template'];
         $cfg      = config("contisign.templates.$templateKey");
-        $documentId = 'mocked-document-id';
-        return $documentId;
         // dd($templateKey, $payload, $mapped, $cfg);
         if ($templateKey == "solicitud") {
             $annexed = $this->buildAnnexed($payload);
         } else {
             $annexed = [];
         }
+
         // 2. createUniKey
         $uniKey = $this->createUniKey($template);
         // Log::debug("Contisign UniKey created for template $templateKey", ['unikey' => $uniKey]);
@@ -95,7 +94,7 @@ class ContisignSubmissionService
         // 4. sendSigns
         $this->sendSigns($templateKey, $template, $payload, $documentId);
 
-        $documentId = 'mocked-document-id';
+        // $documentId = 'mocked-document-id';
         return $documentId;
     }
 
