@@ -1,0 +1,552 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+/*
+|--------------------------------------------------------------------------
+| theme.css — Global custom theme
+|--------------------------------------------------------------------------
+| Centralized custom styling per project conventions. Bootstrap utility
+| classes still handle spacing/grids/responsiveness; this file holds
+| theme variables, branding, layout shells, the wizard stepper, and
+| reusable component polish.
+|
+| Aesthetic: Linear meets Stripe — clean, calm, trustworthy, slightly
+| clinical. Light theme. Comfortable density. 8px radius. Subtle shadows.
+*/
+
+/* ==========================================================================
+   1. Design Tokens
+   ========================================================================== */
+:root {
+    /* Brand */
+    --ob-primary: #0087FF;
+    --ob-primary-rgb: 0, 135, 255;
+    --ob-primary-hover: #0072d6;
+    --ob-primary-active: #005fb3;
+    --ob-primary-soft: #e6f3ff;
+    --ob-primary-ring: rgba(var(--ob-primary-rgb), 0.25);
+
+    /* Neutrals (warm-tinted, Stripe-like) */
+    --ob-bg: #f7f9fc;
+    --ob-surface: #ffffff;
+    --ob-surface-alt: #fbfcfe;
+    --ob-border: #e6e9ef;
+    --ob-border-strong: #d3d9e3;
+
+    /* Text */
+    --ob-text: #1a2233;
+    --ob-text-muted: #5b6677;
+    --ob-text-subtle: #8a94a6;
+
+    /* Feedback */
+    --ob-success: #1f9d57;
+    --ob-danger: #e5484d;
+    --ob-warning: #d9822b;
+
+    /* Radius */
+    --ob-radius-sm: 6px;
+    --ob-radius: 8px;
+    --ob-radius-lg: 12px;
+    --ob-radius-pill: 999px;
+
+    /* Shadows — subtle */
+    --ob-shadow-xs: 0 1px 2px rgba(26, 34, 51, 0.04);
+    --ob-shadow-sm: 0 1px 3px rgba(26, 34, 51, 0.06), 0 1px 2px rgba(26, 34, 51, 0.04);
+    --ob-shadow-md: 0 4px 12px rgba(26, 34, 51, 0.08);
+    --ob-shadow-lg: 0 12px 32px rgba(26, 34, 51, 0.10);
+
+    /* Layout */
+    --ob-header-h: 64px;
+    --ob-footer-h: 56px;
+    --ob-content-max: 920px;
+
+    /* Typography */
+    --ob-font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --ob-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    /* Motion */
+    --ob-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ob-dur: 220ms;
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--ob-font-ui);
+    background-color: var(--ob-bg);
+    color: var(--ob-text);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+code, kbd, samp, .ob-mono {
+    font-family: var(--ob-font-mono);
+}
+
+a {
+    color: var(--ob-primary);
+    text-decoration: none;
+}
+a:hover { color: var(--ob-primary-hover); }
+
+/* App shell: sticky footer layout that works on desktop + mobile */
+.ob-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+.ob-main {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+/* Two-column split inside the main content area only — header and footer
+   remain full-width above/below. Image panel shows at md+ (incl. iPad
+   portrait), hidden on phones where the tall images don't fit. */
+.ob-split {
+    display: flex;
+    align-items: stretch;
+    min-height: 100%;
+}
+.ob-split__form {
+    flex: 1 1 100%;
+    min-width: 0;
+}
+.ob-split__aside {
+    display: none; /* phones: form takes full width */
+}
+
+@media (min-width: 1280px) {
+    .ob-split__form  { flex: 0 0 70%; max-width: 70%; }
+    .ob-split__aside {
+        display: block;
+        flex: 0 0 30%;
+        max-width: 30%;
+        background: var(--ob-surface-alt);
+        border-left: 1px solid var(--ob-border);
+    }
+    .ob-split__aside-sticky {
+        position: sticky;
+        top: var(--ob-header-h);
+        height: calc(100vh - var(--ob-header-h));
+        height: calc(100dvh - var(--ob-header-h));
+        overflow: hidden;
+    }
+    .ob-split__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+}
+
+/* ==========================================================================
+   3. Header + Logo slot
+   ========================================================================== */
+.ob-header {
+    height: var(--ob-header-h);
+    background: var(--ob-surface);
+    border-bottom: 1px solid var(--ob-border);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+/* Logo region — reserves space so layout never jumps while the image loads.
+   Horizontal client logo scales proportionally inside this box. */
+.ob-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+}
+.ob-logo__img {
+    max-height: 40px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    display: block;
+}
+/* Placeholder shown when no client logo has been configured yet */
+.ob-logo__placeholder {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 40px;
+    padding: 0 .75rem;
+    border: 1px dashed var(--ob-border-strong);
+    border-radius: var(--ob-radius);
+    color: var(--ob-text-subtle);
+    font-size: .8125rem;
+    letter-spacing: .01em;
+}
+
+@media (max-width: 575.98px) {
+    :root { --ob-header-h: 56px; }
+    .ob-logo, .ob-logo__img { min-height: 32px; }
+    .ob-logo__img { max-height: 32px; max-width: 150px; }
+    .ob-logo__placeholder { height: 32px; font-size: .75rem; }
+}
+
+/* ==========================================================================
+   4. Footer + Logo slot
+   ========================================================================== */
+.ob-footer {
+    flex-shrink: 0;
+    min-height: var(--ob-footer-h);
+    background: var(--ob-surface);
+    border-top: 1px solid var(--ob-border);
+    color: var(--ob-text-subtle);
+    font-size: .8125rem;
+    display: flex;
+    align-items: center;
+}
+.ob-footer__logo {
+    max-height: 28px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    opacity: .9;
+}
+
+/* ==========================================================================
+   5. Card surface
+   ========================================================================== */
+.ob-card {
+    background: var(--ob-surface);
+    border: 1px solid var(--ob-border);
+    border-radius: var(--ob-radius-lg);
+    box-shadow: var(--ob-shadow-sm);
+}
+.ob-card__body { padding: 1.75rem; }
+@media (max-width: 575.98px) {
+    .ob-card__body { padding: 1.25rem; }
+}
+
+/* ==========================================================================
+   6. Wizard stepper
+   --------------------------------------------------------------------------
+   Desktop: horizontal stepper with connecting track.
+   Mobile:  collapses to a "Step X of Y" label + thin progress bar.
+   ========================================================================== */
+.ob-stepper {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: ob-step;
+}
+.ob-stepper__item {
+    flex: 1 1 0;
+    position: relative;
+    text-align: center;
+    min-width: 0;
+}
+/* Connecting line */
+.ob-stepper__item:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    background: var(--ob-border-strong);
+    z-index: 0;
+}
+.ob-stepper__item.is-complete:not(:first-child)::before,
+.ob-stepper__item.is-active:not(:first-child)::before {
+    background: var(--ob-primary);
+}
+.ob-stepper__dot {
+    counter-increment: ob-step;
+    position: relative;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    margin: 0 auto .5rem;
+    border-radius: var(--ob-radius-pill);
+    background: var(--ob-surface);
+    border: 2px solid var(--ob-border-strong);
+    color: var(--ob-text-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8125rem;
+    font-weight: 600;
+    transition: all var(--ob-dur) var(--ob-ease);
+}
+.ob-stepper__dot::after { content: counter(ob-step); }
+.ob-stepper__item.is-active .ob-stepper__dot {
+    border-color: var(--ob-primary);
+    color: var(--ob-primary);
+    box-shadow: 0 0 0 4px var(--ob-primary-ring);
+}
+.ob-stepper__item.is-complete .ob-stepper__dot {
+    background: var(--ob-primary);
+    border-color: var(--ob-primary);
+    color: #fff;
+}
+.ob-stepper__item.is-complete .ob-stepper__dot::after {
+    content: '\f00c'; /* fa-check */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: .75rem;
+}
+.ob-stepper__label {
+    font-size: .75rem;
+    color: var(--ob-text-muted);
+    line-height: 1.3;
+    padding: 0 .25rem;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ob-stepper__item.is-active .ob-stepper__label {
+    color: var(--ob-text);
+    font-weight: 600;
+}
+
+/* Mobile compact stepper */
+.ob-stepper-mobile { display: none; }
+.ob-stepper-mobile__track {
+    height: 6px;
+    background: var(--ob-border);
+    border-radius: var(--ob-radius-pill);
+    overflow: hidden;
+}
+.ob-stepper-mobile__fill {
+    height: 100%;
+    background: var(--ob-primary);
+    border-radius: var(--ob-radius-pill);
+    transition: width var(--ob-dur) var(--ob-ease);
+}
+.ob-stepper-mobile__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: .5rem;
+}
+.ob-stepper-mobile__count {
+    font-family: var(--ob-font-mono);
+    font-size: .75rem;
+    color: var(--ob-text-subtle);
+}
+.ob-stepper-mobile__current {
+    font-size: .9375rem;
+    font-weight: 600;
+    color: var(--ob-text);
+}
+
+@media (max-width: 767.98px) {
+    .ob-stepper { display: none; }
+    .ob-stepper-mobile { display: block; }
+}
+
+/* ==========================================================================
+   7. Forms
+   ========================================================================== */
+.form-label {
+    font-size: .8125rem;
+    font-weight: 600;
+    color: var(--ob-text);
+    margin-bottom: .375rem;
+}
+.form-label .ob-req { color: var(--ob-danger); margin-left: 2px; }
+
+.form-control, .form-select {
+    border-radius: var(--ob-radius);
+    border-color: var(--ob-border-strong);
+    color: var(--ob-text);
+    padding: .5625rem .75rem;
+    transition: border-color var(--ob-dur) var(--ob-ease),
+                box-shadow var(--ob-dur) var(--ob-ease);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--ob-primary);
+    box-shadow: 0 0 0 4px var(--ob-primary-ring);
+}
+.form-control::placeholder { color: var(--ob-text-subtle); }
+.form-text { color: var(--ob-text-subtle); font-size: .75rem; }
+
+.input-mono { font-family: var(--ob-font-mono); letter-spacing: .02em; }
+
+/* ==========================================================================
+   8. Buttons
+   ========================================================================== */
+.btn {
+    border-radius: var(--ob-radius);
+    font-weight: 600;
+    font-size: .9375rem;
+    padding: .5625rem 1.1rem;
+    transition: all var(--ob-dur) var(--ob-ease);
+}
+.btn-primary {
+    --bs-btn-bg: var(--ob-primary);
+    --bs-btn-border-color: var(--ob-primary);
+    --bs-btn-hover-bg: var(--ob-primary-hover);
+    --bs-btn-hover-border-color: var(--ob-primary-hover);
+    --bs-btn-active-bg: var(--ob-primary-active);
+    --bs-btn-active-border-color: var(--ob-primary-active);
+    --bs-btn-focus-shadow-rgb: var(--ob-primary-rgb);
+}
+.btn-outline-secondary {
+    --bs-btn-color: var(--ob-text-muted);
+    --bs-btn-border-color: var(--ob-border-strong);
+    --bs-btn-hover-bg: var(--ob-surface-alt);
+    --bs-btn-hover-border-color: var(--ob-border-strong);
+    --bs-btn-hover-color: var(--ob-text);
+}
+.btn:focus-visible { box-shadow: 0 0 0 4px var(--ob-primary-ring); }
+
+/* ==========================================================================
+   9. Document upload control (touch-friendly)
+   ========================================================================== */
+.ob-upload {
+    border: 1.5px dashed var(--ob-border-strong);
+    border-radius: var(--ob-radius);
+    background: var(--ob-surface-alt);
+    padding: 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--ob-dur) var(--ob-ease);
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+.ob-upload:hover, .ob-upload.is-dragover {
+    border-color: var(--ob-primary);
+    background: var(--ob-primary-soft);
+}
+.ob-upload__icon { font-size: 1.4rem; color: var(--ob-primary); }
+.ob-upload.is-filled {
+    border-style: solid;
+    border-color: var(--ob-success);
+    background: rgba(31, 157, 87, 0.06);
+}
+.ob-upload.is-error {
+    border-style: solid;
+    border-color: var(--ob-danger);
+    background: rgba(229, 72, 77, 0.06);
+}
+.ob-upload.is-error .ob-upload__icon { color: var(--ob-danger); }
+
+/* ==========================================================================
+   10. Toasts / notifications container
+   ========================================================================== */
+.ob-toast-container {
+    position: fixed;
+    top: calc(var(--ob-header-h) + 1rem);
+    right: 1rem;
+    z-index: 1090;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    max-width: min(360px, calc(100vw - 2rem));
+}
+
+/* ==========================================================================
+   12. Review summary
+   ========================================================================== */
+.ob-review__section {
+    border: 1px solid var(--ob-border);
+    border-radius: var(--ob-radius);
+    overflow: hidden;
+}
+.ob-review__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 1rem;
+    background: var(--ob-surface-alt);
+    border-bottom: 1px solid var(--ob-border);
+}
+.ob-review__edit {
+    font-size: .8125rem;
+    font-weight: 600;
+    color: var(--ob-primary);
+    white-space: nowrap;
+}
+.ob-review__list {
+    margin: 0;
+    padding: .5rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25rem 1.5rem;
+}
+.ob-review__list > div {
+    padding: .4rem 0;
+    border-bottom: 1px dashed var(--ob-border);
+}
+.ob-review__list dt {
+    font-size: .6875rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--ob-text-subtle);
+    font-weight: 600;
+    margin-bottom: .1rem;
+}
+.ob-review__list dd {
+    margin: 0;
+    font-size: .9375rem;
+    color: var(--ob-text);
+    word-break: break-word;
+}
+.ob-review__docs {
+    list-style: none;
+    margin: 0;
+    padding: .75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.ob-review__docs li {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9375rem;
+}
+.ob-review__docs li i { color: var(--ob-success); }
+.ob-review__doc-key { font-weight: 600; }
+.ob-review__doc-name { color: var(--ob-text-muted); font-size: .8125rem; }
+.ob-review__doc-parts {
+    font-size: .6875rem;
+    font-weight: 600;
+    color: var(--ob-primary);
+    background: var(--ob-primary-soft);
+    padding: .1rem .45rem;
+    border-radius: var(--ob-radius-pill);
+}
+
+@media (max-width: 575.98px) {
+    .ob-review__list { grid-template-columns: 1fr; gap: 0; }
+    .ob-review__doc-name { display: block; width: 100%; }
+}
+
+/* ==========================================================================
+   13. Page-load reveal (single orchestrated entrance)
+   ========================================================================== */
+@keyframes ob-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.ob-reveal { animation: ob-rise var(--ob-dur) var(--ob-ease) both; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .001ms !important;
+        transition-duration: .001ms !important;
+    }
+}
