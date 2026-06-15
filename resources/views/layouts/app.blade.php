@@ -90,7 +90,7 @@
 
                 {{-- Sticky image panel (md+ only) --}}
                 @if ($hasSidePanel)
-                <aside class="ob-split__aside" aria-hidden="true">
+                <aside class="ob-split__aside" style="--bg-image:  url({{ asset($sideImg) }});" aria-hidden="true">
                     <div class="ob-split__aside-sticky">
                         <img src="{{ asset($sideImg) }}" alt="" class="ob-split__img">
                     </div>

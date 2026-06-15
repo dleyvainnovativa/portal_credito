@@ -114,6 +114,7 @@ a:hover { color: var(--ob-primary-hover); }
     align-items: stretch;
     min-height: 100%;
 }
+
 .ob-split__form {
     flex: 1 1 100%;
     min-width: 0;
@@ -123,13 +124,13 @@ a:hover { color: var(--ob-primary-hover); }
 }
 
 @media (min-width: 1280px) {
-    .ob-split__form  { flex: 0 0 70%; max-width: 70%; }
+    .ob-split__form  { flex: 0 0 58%; max-width: 58%; }
     .ob-split__aside {
         display: block;
-        flex: 0 0 30%;
-        max-width: 30%;
-        background: var(--ob-surface-alt);
-        border-left: 1px solid var(--ob-border);
+        flex: 0 0 42%;
+        max-width: 42%;
+        /* background: var(--ob-surface-alt); */
+        /* border-left: 1px solid var(--ob-border); */
     }
     .ob-split__aside-sticky {
         position: sticky;
@@ -141,11 +142,32 @@ a:hover { color: var(--ob-primary-hover); }
     .ob-split__img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center top;
+        object-fit: contain;
+        object-position: top right;
+        /* object-position: center top; */
         display: block;
     }
 }
+
+.ob-split__aside {
+    /* display: none; */
+    position: relative;
+    /* overflow: hidden; */
+    /* overflow-x: hidden;
+    overflow-y: hidden; */
+}
+
+/* .ob-split__aside::before {
+    content: "";
+    position: absolute;
+    inset: -0.1px;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px) brightness(50%);
+    opacity: 0.6;
+    z-index: 0;
+} */
 
 /* ==========================================================================
    3. Header + Logo slot

@@ -45,6 +45,9 @@ return [
             'regex' => 'El RFC no tiene un formato válido.',
             'size'  => 'El RFC debe tener :size caracteres.',
         ],
+        'website' => [
+            'regex' => 'Ingrese solo el dominio, por ejemplo: ejemplo.com.mx (sin https://).',
+        ],
     ],
 
     /*

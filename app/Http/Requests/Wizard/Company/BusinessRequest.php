@@ -13,7 +13,7 @@ class BusinessRequest extends StepRequest
             'rfc'             => ['required', 'string', 'size:12', 'regex:/^[A-ZÑ&]{3}\d{6}[A-Z\d]{3}$/i'],
             'legal_name'      => ['required', 'string', 'max:255'],
             'commercial_name' => ['required', 'string', 'max:255'],
-            'website'         => ['nullable', 'url', 'max:255'],
+            'website'         => ['nullable', 'string', 'max:255', 'regex:/^([a-z0-9-]+\.)+[a-z]{2,}$/i'],
         ];
     }
 

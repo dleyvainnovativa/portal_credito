@@ -10,8 +10,8 @@
     </div>
     <div class="col-12 col-sm-6">
         <label for="website" class="form-label">{{ __('Website') }}</label>
-        <input type="url" class="form-control" disabled id="website" name="website"
-            placeholder="https://" value="{{ old('website', $data['website'] ?? '') }}">
+        <input type="url" class="form-control" id="website" name="website"
+            placeholder="midominio.com" value="{{ old('website', $data['website'] ?? '') }}">
     </div>
     <div class="col-12">
         <label for="legal_name" class="form-label">{{ __('Legal Business Name') }}<span class="ob-req">*</span></label>
