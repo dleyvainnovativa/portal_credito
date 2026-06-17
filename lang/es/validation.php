@@ -46,7 +46,7 @@ return [
             'size'  => 'El RFC debe tener :size caracteres.',
         ],
         'website' => [
-            'regex' => 'Ingrese solo el dominio, por ejemplo: ejemplo.com.mx (sin https://).',
+            'regex' => 'Ingrese solo el dominio, por ejemplo: www.sistemascontino.com.mx (sin https://, no poner /).',
         ],
     ],
 
