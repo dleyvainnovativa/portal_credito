@@ -218,7 +218,6 @@ function initUploadFields() {
         async function handleSelection(fileList) {
             const file = fileList && fileList[0];
             if (!file) return;
-
             zone.classList.remove('is-error');
 
             // Split PDFs over the limit into parts (dynamic import keeps

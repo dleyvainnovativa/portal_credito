@@ -32,11 +32,7 @@
 
     {{-- Client-side annex limit + split messages (read by app.js / pdf-split) --}}
     <script>
-        window.__obAnnexMaxBytes = {
-            {
-                (int) config('contisign.annex.max_size_kb', 15360) * 1024
-            }
-        };
+        window.__obAnnexMaxBytes = {{(int) config('contisign.annex.max_size_kb', 15360) * 1024}};
         window.__obPartsLabel = @json(__('parts'));
         window.__obOversizeMsg = @json(__('The file is too large and a single page exceeds the :mb MB limit. Please upload a smaller file.', ['mb' => round(((int) config('contisign.annex.max_size_kb', 15360)) / 1024)]));
         window.__obSplitErrMsg = @json(__('The PDF could not be processed. Please try another file.'));
