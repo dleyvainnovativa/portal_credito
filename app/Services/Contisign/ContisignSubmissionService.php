@@ -240,37 +240,50 @@ class ContisignSubmissionService
         $userSign = $template['UserSigns'][0] ?? [];
         $limitDate = now()->addDays(30)->toIso8601String();
 
-        $signature = [
-            'Name'         => $name,
-            'Email'        => $email,
-            'Charge'       => $userSign['Charge'] ?? 'Signed',
-            'Position'     => $userSign['Position'] ?? '',
-            'BusinessName' => $userSign['BusinessName'] ?? '',
-            'Order'        => $userSign['Order'] ?? 1,
-            'external'     => true,
-            'bgColor'      => $userSign['bgColor'] ?? '3dc108',
-            'x'            => $userSign['x'] ?? null,
-            'y'            => $userSign['y'] ?? null,
-            'width'        => $userSign['width'] ?? null,
-            'height'       => $userSign['height'] ?? null,
-            'dimension'    => $userSign['dimension'] ?? ['w' => 612, 'h' => 792],
-            'page'         => $userSign['page'] ?? 0,
-            'Status'       => 'Pendiente',
-            'editing'      => false,
-            'LimitDate'    => $limitDate,
-            'PhoneNumber'  => (string) $phone,
-            'phone'        => (string) $phone,
-            'AditionalInformation' => [
-                'x'          => $userSign['x'] ?? null,
-                'y'          => $userSign['y'] ?? null,
-                'width'      => $userSign['width'] ?? null,
-                'height'     => $userSign['height'] ?? null,
-                'bgcolor'    => '#' . ($userSign['bgColor'] ?? '3dc108') . '99',
-                'name'       => $name,
-                'page'       => $userSign['page'] ?? 0,
-                'dimensions' => $userSign['dimension'] ?? ['w' => 612, 'h' => 792],
-            ],
-        ];
+        // dd($userSign);
+        $signature = $userSign;
+        $signature["Name"] = $name;
+        $signature["Email"] = $email;
+        $signature["LimitDate"] = $limitDate;
+        $signature["PhoneNumber"] = $phone;
+        $signature["phone"] = (string) $phone;
+        $signature["AditionalInformation"]["name"] = $name;
+
+        // $signature = [
+        //     'Name'         => $name,
+        //     'Email'        => $email,
+        //     'Charge'       => $userSign['Charge'] ?? 'Signed',
+        //     'Position'     => $userSign['Position'] ?? '',
+        //     'BusinessName' => $userSign['BusinessName'] ?? '',
+        //     'Order'        => $userSign['Order'] ?? 1,
+        //     'external'     => true,
+        //     'bgColor'      => $userSign['bgColor'] ?? '3dc108',
+        //     'x'            => $userSign['x'] ?? null,
+        //     'y'            => $userSign['y'] ?? null,
+        //     'width'        => $userSign['width'] ?? null,
+        //     'height'       => $userSign['height'] ?? null,
+        //     'dimension'    => $userSign['dimension'] ?? ['w' => 612, 'h' => 792],
+        //     'page'         => $userSign['page'] ?? 0,
+        //     'Status'       => 'Pendiente',
+        //     'editing'      => false,
+        //     'LimitDate'    => $limitDate,
+        //     'PhoneNumber'  => (string) $phone,
+        //     'phone'        => (string) $phone,
+        //     'AditionalInformation' => [
+        //         'xNorm'          => $userSign['xNorm'] ?? null,
+        //         'yNorm'          => $userSign['yNorm'] ?? null,
+        //         'wNorm'          => $userSign['wNorm'] ?? null,
+        //         'hNorm'          => $userSign['hNorm'] ?? null,
+        //         'page'       => $userSign['page'] ?? 0,
+        //         'x'          => $userSign['x'] ?? null,
+        //         'y'          => $userSign['y'] ?? null,
+        //         'width'      => $userSign['width'] ?? null,
+        //         'height'     => $userSign['height'] ?? null,
+        //         'name'       => $name,
+        //         'bgcolor'    => '#' . ($userSign['bgColor'] ?? '3dc108') . '99',
+        //         'dimensions' => $userSign['dimension'] ?? ['w' => 612, 'h' => 792],
+        //     ],
+        // ];
 
         // One signature per SignType (matches the provided send_signatures.php).
         $signatures = [];
