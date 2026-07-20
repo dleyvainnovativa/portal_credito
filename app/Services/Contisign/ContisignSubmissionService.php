@@ -42,6 +42,16 @@ class ContisignSubmissionService
         'tax_certificate'           => 'Constancia de Situación Fiscal',
         'articles_of_incorporation' => 'Acta Constitutiva',
         'power_of_attorney'         => 'Acta de Poderes',
+        'annual_return_1'      => 'Declaración Anual (última)',
+        'annual_return_2'      => 'Declaración Anual (anterior)',
+        'financials_partial_1' => 'Estados Financieros Parciales (página 1)',
+        'financials_partial_2' => 'Estados Financieros Parciales (página 2)',
+        'credit_over_threshold'         => [
+            'annual_return_1'      => 'Declaración Anual (última)',
+            'annual_return_2'      => 'Declaración Anual (anterior)',
+            'financials_partial_1' => 'Estados Financieros Parciales (página 1)',
+            'financials_partial_2' => 'Estados Financieros Parciales (página 2)',
+        ],
     ];
 
     /**

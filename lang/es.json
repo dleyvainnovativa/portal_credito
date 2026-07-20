@@ -106,5 +106,13 @@
     "The full review screen arrives in Phase 5.": "La pantalla de revisión completa llega en la Fase 5.",
     "Code not found. Please enter the details manually.": "Código no encontrado. Capture los datos manualmente.",
     "Could not look up the postal code.": "No se pudo consultar el código postal.",
-    "Looking up…": "Consultando…"
+    "Looking up…": "Consultando…",
+
+    "Will you request credit over $300,000?": "¿Su línea de crédito será mayor a $300,000?",
+    "Last 2 annual tax returns": "Últimas 2 declaraciones anuales",
+    "Partial financial statements with accountant signature and license": "Últimos 2 estados financieros parciales con firma",
+    "Latest Annual Tax Return": "Última declaración anual",
+    "Previous Annual Tax Return": "Declaración anual anterior",
+    "Partial Financial Statements (page 1)": "Estados financieros parciales (1)",
+    "Partial Financial Statements (page 2)": "Estados financieros parciales (2)"
 }

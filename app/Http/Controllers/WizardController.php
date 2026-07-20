@@ -188,6 +188,24 @@ class WizardController extends Controller
             unset($data['id_back']);
         }
 
+        // Conditional credit docs: if the gate is off, drop any previously
+        // stored files for those keys so they aren't submitted as annexes.
+        // IMPORTANT: only act when THIS submitted step is the one that hosts the
+        // credit checkbox. We detect that via a hidden marker field
+        // (credit_docs_step=1) that the identification/documents blade always
+        // sends. On later steps the marker is absent, so files uploaded earlier
+        // are never wrongly deleted. When present but the box is unchecked
+        // (boolean false), we purge.
+        if ($request->boolean('credit_docs_step') && ! $request->boolean('credit_over_threshold')) {
+            foreach (array_keys(config('documents.credit_over_threshold', [])) as $key) {
+                if ($this->state->hasFile($key)) {
+                    $this->files->deleteKey($token, $key);
+                    $this->state->forgetFile($key);
+                }
+                unset($data[$key]);
+            }
+        }
+
         foreach ($data as $field => $value) {
             // Drop the helper flags from persisted data.
             if (str_ends_with($field, '_exists')) {
@@ -215,17 +233,22 @@ class WizardController extends Controller
         return $data;
     }
 
-    /** Document (file) keys expected on a given step. */
     private function documentKeysForStep(string $type, string $step): array
     {
+        $credit = array_keys(config('documents.credit_over_threshold', []));
+
         return match ("$type.$step") {
             'individual.identification' => array_merge(
                 ['id_front', 'id_back'],
-                array_keys(config('documents.required.individual', []))
+                array_keys(config('documents.required.individual', [])),
+                $credit
             ),
-            'company.documents'      => array_keys(config('documents.required.company', [])),
+            'company.documents' => array_merge(
+                array_keys(config('documents.required.company', [])),
+                $credit
+            ),
             'company.representative' => ['id_front', 'id_back'],
-            default                  => [],
+            default => [],
         };
     }
 

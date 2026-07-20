@@ -79,16 +79,16 @@ return [
             'id'         => env('CONTISIGN_TPL_SOLICITUD_ID', '626e9807-2070-4d89-ae52-acb5bbe15557'),
             'name'       => '00.SOLICITUD DE CRÉDITO (PORTAL)',
             'json_path'  => 'contisign/templates/solicitud_credito.json',
-            // 'signer'     => [
-            //     'name'  => 'Daniel',
-            //     'email' => 'dancaballerodlc@gmail.com',
-            //     'phone' => '2291645189',
-            // ],
             'signer'     => [
-                'name'  => 'Silvana',
-                'email' => 'silvanal@sistemascontino.com.mx',
-                'phone' => '2299581884',
+                'name'  => 'Daniel',
+                'email' => 'dancaballerodlc@gmail.com',
+                'phone' => '2291645189',
             ],
+            // 'signer'     => [
+            //     'name'  => 'Silvana',
+            //     'email' => 'silvanal@sistemascontino.com.mx',
+            //     'phone' => '2299581884',
+            // ],
         ],
 
         'buro' => [

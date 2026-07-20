@@ -7,14 +7,13 @@ use Illuminate\Validation\Rule;
 
 /*
 | Individual · Step 3 — Identification & Documents
-| Conditional rule: INE requires front + back images; Passport / Immigration
-| require only the front. Required documents (proof of address, tax cert) are
-| enforced here too. File constraints come from config/documents.php.
+| INE requires front + back images; Passport / Immigration require only front.
+| Required docs (proof of address, tax cert) enforced here. When the >$300,000
+| credit box is checked, four conditional documents become required too.
 |
-| Note: on "back" navigation a previously uploaded file may already be held by
-| TempFileService (Phase 4); the `required` rules use `required_without` against
-| a hidden field that marks an existing upload so users aren't forced to
-| re-select files they already provided.
+| On "back" navigation a previously uploaded file may already be held by
+| TempFileService; the `{key}_exists` hidden field lets those rules pass without
+| re-selecting.
 */
 
 class IdentificationRequest extends StepRequest
@@ -23,11 +22,12 @@ class IdentificationRequest extends StepRequest
     {
         $maxKb = (int) config('contisign.annex.max_size_kb', 15360);
         $mimes = implode(',', config('contisign.annex.mimes', ['pdf', 'jpg', 'jpeg', 'png']));
-
         $isIne = $this->input('id_type') === 'ine';
 
-        return [
+        $rules = [
             'id_type' => ['required', Rule::in(['ine', 'passport', 'immigration'])],
+
+            'credit_over_threshold' => ['nullable', 'boolean'],
 
             'id_front'   => [
                 Rule::requiredIf(fn() => ! $this->boolean('id_front_exists')),
@@ -57,5 +57,26 @@ class IdentificationRequest extends StepRequest
             ],
             'tax_certificate.*'  => ['file', "mimes:$mimes", "max:$maxKb"],
         ];
+
+        // Conditional documents — required only when the box is checked AND
+        // nothing is already stored for that key.
+        foreach (array_keys(config('documents.credit_over_threshold', [])) as $key) {
+            $rules[$key] = [
+                Rule::requiredIf(fn() => $this->boolean('credit_over_threshold')
+                    && ! $this->boolean("{$key}_exists")),
+                'nullable',
+                'array',
+            ];
+            $rules["$key.*"] = ['file', "mimes:$mimes", "max:$maxKb"];
+        }
+
+        return $rules;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'credit_over_threshold' => $this->boolean('credit_over_threshold'),
+        ]);
     }
 }

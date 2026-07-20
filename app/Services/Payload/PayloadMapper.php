@@ -151,16 +151,23 @@ class PayloadMapper
 
     private function expectedDocumentKeys(string $type): array
     {
+        // Conditional documents (credit line > $300,000) apply to both flows.
+        // They are stored only when the applicant checked the box, so keys with
+        // no stored file are simply skipped in documents().
+        $credit = array_keys(config('documents.credit_over_threshold', []));
+
         if ($type === 'company') {
             return array_merge(
                 array_keys(config('documents.required.company', [])),
+                $credit,
                 ['id_front', 'id_back'] // legal representative ID
             );
         }
 
         return array_merge(
             ['id_front', 'id_back'], // applicant ID
-            array_keys(config('documents.required.individual', []))
+            array_keys(config('documents.required.individual', [])),
+            $credit
         );
     }
 

@@ -280,6 +280,17 @@ function showError(zone, text, icon, msg) {
     if (text) text.textContent = msg;
 }
 
+function initToggles() {
+    document.querySelectorAll('[data-ob-toggle]').forEach((box) => {
+        const targetId = box.getAttribute('data-ob-toggle');
+        const target = document.querySelector(`[data-ob-toggle-target="${targetId}"]`);
+        if (!target) return;
+        const sync = () => { target.hidden = !box.checked; };
+        box.addEventListener('change', sync);
+        sync(); // set initial state on load (handles validation redisplay)
+    });
+}
+
 function initPostalLookup() {
     const input = document.querySelector('[data-ob-postal="input"]');
     if (!input) return;
@@ -378,6 +389,7 @@ function initPostalLookup() {
 function initWizard() {
     initIdTypeToggle();
     initUploadFields();
+    initToggles();
     initPostalLookup();
 }
 

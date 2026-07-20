@@ -4,6 +4,7 @@
 'flow' => $flow,
 'docLabels' => array_merge(
 config('documents.required.company', []),
+config('documents.credit_over_threshold', []),
 ['id_front' => 'Front Image', 'id_back' => 'Back Image']
 ),
 ])

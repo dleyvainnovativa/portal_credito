@@ -4,7 +4,8 @@
 'flow' => $flow,
 'docLabels' => array_merge(
 ['id_front' => 'Front Image', 'id_back' => 'Back Image'],
-config('documents.required.individual', [])
+config('documents.required.individual', []),
+config('documents.credit_over_threshold', [])
 ),
 ])
 @include('wizard.steps.shared.confirm-submit')

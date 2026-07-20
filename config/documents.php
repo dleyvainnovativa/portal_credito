@@ -41,6 +41,16 @@ return [
         ],
     ],
 
+    // Conditional documents: only required when the applicant declares a credit
+    // line over $300,000 (UI checkbox). Same shape as `required.*` (key => label).
+    // Uploaded as annexes exactly like the required ones. Applies to BOTH flows.
+    'credit_over_threshold' => [
+        'annual_return_1'      => 'Latest Annual Tax Return',
+        'annual_return_2'      => 'Previous Annual Tax Return',
+        'financials_partial_1' => 'Partial Financial Statements (page 1)',
+        'financials_partial_2' => 'Partial Financial Statements (page 2)',
+    ],
+
     // Identification images, gated by selected identification type.
     'identification' => [
         'ine'         => ['front' => 'INE Front', 'back' => 'INE Back'],
