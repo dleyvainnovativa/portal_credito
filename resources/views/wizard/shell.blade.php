@@ -14,7 +14,7 @@
 
 @section('title', $definition['label'])
 
-@section('side-image', $position)
+@section('side-image', ($flow->type === 'company' ? 'moral' : 'fisica') . '/' . $position)
 
 @section('header-actions')
     <form method="POST" action="{{ route('wizard.cancel') }}"

@@ -21,10 +21,10 @@
 
     <title>@yield('title', config('branding.app_name', 'Onboarding'))</title>
 
-    {{-- Preconnect + fonts: Inter (UI) and JetBrains Mono (monospace) --}}
+    {{-- Preconnect + fonts: Roboto (UI) and JetBrains Mono (monospace) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -62,17 +62,42 @@
         {{-- ===================== Main: form + side image ===================== --}}
         @php
         // Resolve the side-image for this screen. Step views set the
-        // 'side-image' section to their 1-indexed step number; other screens
-        // fall back to the default. Images live in public/img/side/{n}.png and
-        // wrap with modulo so any step count maps to an available image.
+        // 'side-image' section to "{group}/{n}" where group is fisica|moral and
+        // n is the 1-indexed step number. Images live in
+        // public/img/side/{group}/{n}.png and wrap with modulo so any step
+        // count maps to an available image. A per-group count can be set in
+        // config/branding.php (side_image_count.fisica / .moral); otherwise the
+        // scalar side_image_count applies to both. Non-step screens fall back
+        // to the default image.
         $sideValue = trim($__env->yieldContent('side-image'));
-        $sideCount = (int) config('branding.side_image_count', 7);
-        $sideImg = config('branding.side_image_default', 'img/side/1.png');
-        if ($sideValue !== '' && is_numeric($sideValue) && $sideCount > 0) {
-        $n = (((int) $sideValue - 1) % $sideCount) + 1;
-        $sideImg = "img/side/{$n}.png";
+        $sideImg = config('branding.side_image_default', 'img/side/fisica/1.png');
+
+        if ($sideValue !== '' && str_contains($sideValue, '/')) {
+            [$group, $stepNo] = explode('/', $sideValue, 2);
+            $group = in_array($group, ['fisica', 'moral'], true) ? $group : 'fisica';
+
+            // Per-group count, with scalar/array config both supported.
+            $countCfg = config('branding.side_image_count', 7);
+            $count = is_array($countCfg)
+                ? (int) ($countCfg[$group] ?? reset($countCfg) ?: 7)
+                : (int) $countCfg;
+
+            if (is_numeric($stepNo) && $count > 0) {
+                $n = (((int) $stepNo - 1) % $count) + 1;
+                $candidate = "img/side/{$group}/{$n}.png";
+                // Fall back to the group's first image, then the default, if the
+                // exact step image isn't present yet.
+                if (file_exists(public_path($candidate))) {
+                    $sideImg = $candidate;
+                } elseif (file_exists(public_path("img/side/{$group}/1.png"))) {
+                    $sideImg = "img/side/{$group}/1.png";
+                }
+            }
         }
-        $hasSidePanel = file_exists(public_path('img/side/1.png'));
+
+        // Show the panel if any grouped image exists.
+        $hasSidePanel = file_exists(public_path('img/side/fisica/1.png'))
+            || file_exists(public_path('img/side/moral/1.png'));
         @endphp
 
         <main class="ob-main">
