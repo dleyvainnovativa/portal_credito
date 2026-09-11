@@ -27,7 +27,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     @vite(['resources/js/app.js', 'resources/css/theme.css'])
 
@@ -72,7 +72,7 @@
             z-index: 1;
             flex: 1;
             width: 100%;
-            max-width: 1440px;
+            max-width: 1740px;
             margin: 0 auto;
             padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.25rem, 5vw, 5rem);
             display: grid;
