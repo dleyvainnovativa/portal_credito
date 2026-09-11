@@ -60,7 +60,7 @@
     --ob-content-max: 920px;
 
     /* Typography */
-    --ob-font-ui: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --ob-font-ui: 'Roboto Condensed', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
     --ob-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
     /* Motion */

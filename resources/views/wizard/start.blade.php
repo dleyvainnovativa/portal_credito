@@ -45,7 +45,7 @@
             width: 100%;
             overflow: hidden;
             color: #fff;
-            font-family: var(--ob-font-ui, 'Roboto', system-ui, sans-serif);
+            font-family: var(--ob-font-ui, 'Roboto Condensed', system-ui, sans-serif);
             background-color: #061431;
             /* fallback if image missing */
             background-image: var(--hero-bg);
