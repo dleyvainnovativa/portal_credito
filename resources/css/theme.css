@@ -124,11 +124,14 @@ a:hover { color: var(--ob-primary-hover); }
 }
 
 @media (min-width: 1280px) {
-    .ob-split__form  { flex: 0 0 58%; max-width: 58%; }
+    /* Form fills whatever horizontal space the image panel doesn't use, so
+       there's no blank strip between the two columns. */
+    .ob-split__form  { flex: 1 1 auto; max-width: none; }
+    /* Aside is sized by its content (the full-height image) instead of a fixed
+       percentage, so the panel hugs the image exactly. */
     .ob-split__aside {
         display: block;
-        flex: 0 0 42%;
-        max-width: 42%;
+        flex: 0 0 auto;
         /* background: var(--ob-surface-alt); */
         /* border-left: 1px solid var(--ob-border); */
     }
@@ -139,10 +142,13 @@ a:hover { color: var(--ob-primary-hover); }
         height: calc(100dvh - var(--ob-header-h));
         overflow: hidden;
     }
+    /* Full-height image; width follows its aspect ratio so it's shown whole,
+       adapted to the viewport height, with no letterboxing or gap. */
     .ob-split__img {
-        width: 100%;
+        width: auto;
         height: 100%;
-        object-fit: contain;
+        max-width: none;
+        object-fit: cover;
         object-position: top right;
         /* object-position: center top; */
         display: block;
@@ -572,3 +578,125 @@ a:hover { color: var(--ob-primary-hover); }
         transition-duration: .001ms !important;
     }
 }
+
+/* ==========================================================================
+   8. Credit-threshold bottom sheet
+   --------------------------------------------------------------------------
+   Shown once after Persona Moral to ask the ">$300,000 credit" question.
+   Bottom-anchored on all sizes; centered + width-capped on desktop.
+   ========================================================================== */
+.ob-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 1080;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.ob-sheet[hidden] { display: none; }
+
+.ob-sheet__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 20, 49, 0.55);
+    opacity: 0;
+    transition: opacity var(--ob-dur) var(--ob-ease);
+}
+.ob-sheet.is-open .ob-sheet__backdrop { opacity: 1; }
+
+.ob-sheet__panel {
+    position: relative;
+    width: 100%;
+    max-width: 560px;                 /* desktop: a centered card, not full width */
+    margin: 0 auto;
+    background: var(--ob-surface);
+    border-radius: var(--ob-radius-lg) var(--ob-radius-lg) 0 0;
+    box-shadow: var(--ob-shadow-lg);
+    padding: .5rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+    transform: translateY(100%);
+    transition: transform var(--ob-dur) var(--ob-ease);
+    will-change: transform;
+}
+.ob-sheet.is-open .ob-sheet__panel { transform: translateY(0); }
+
+/* On wider screens, lift it off the bottom edge slightly so it reads as a
+   card rather than glued to the viewport floor. */
+@media (min-width: 768px) {
+    .ob-sheet { align-items: center; }
+    .ob-sheet__panel {
+        border-radius: var(--ob-radius-lg);
+        transform: translateY(16px);
+        opacity: 0;
+        transition: transform var(--ob-dur) var(--ob-ease),
+                    opacity var(--ob-dur) var(--ob-ease);
+    }
+    .ob-sheet.is-open .ob-sheet__panel { transform: translateY(0); opacity: 1; }
+}
+
+.ob-sheet__handle {
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: .5rem auto 1rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--ob-radius-pill);
+    background: var(--ob-border-strong);
+    cursor: pointer;
+}
+@media (min-width: 768px) {
+    .ob-sheet__handle { display: none; }   /* no drag affordance on desktop */
+}
+
+.ob-sheet__body { text-align: center; }
+
+.ob-sheet__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
+    border-radius: var(--ob-radius-lg);
+    background: var(--ob-primary-soft);
+    color: var(--ob-primary);
+    font-size: 1.5rem;
+}
+.ob-sheet__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ob-text);
+    margin: 0 0 .5rem;
+}
+.ob-sheet__desc {
+    font-size: .9375rem;
+    line-height: 1.5;
+    color: var(--ob-text-muted);
+    margin: 0 auto 1.5rem;
+    max-width: 44ch;
+}
+.ob-sheet__actions {
+    display: flex;
+    gap: .75rem;
+    margin-bottom: .75rem;
+}
+.ob-sheet__btn {
+    flex: 1 1 0;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-weight: 600;
+}
+.ob-sheet__skip {
+    border: 0;
+    background: none;
+    color: var(--ob-text-subtle);
+    font-size: .8125rem;
+    padding: .5rem;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.ob-sheet__skip:hover { color: var(--ob-text-muted); }
+
+/* Lock background scroll while open (class added to <body> by the script). */
+body.ob-sheet-open { overflow: hidden; }

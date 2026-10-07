@@ -32,6 +32,12 @@
     @vite(['resources/js/app.js', 'resources/css/theme.css'])
 
     <style>
+        /* Page background behind the hero so scrolling past it never shows
+           a white band. */
+        body {
+            background-color: #0c1f3c;
+        }
+
         /* ==================================================================
            Hero - scoped to .hero so it never leaks into the wizard steps
            ================================================================== */

@@ -27,6 +27,11 @@
 @endsection
 
 @section('content')
+    {{-- Up-front ">$300,000 credit" question (company flow, first step, once). --}}
+    @if (!empty($askCreditThreshold))
+        @include('partials.credit-threshold-sheet')
+    @endif
+
     <div class="ob-reveal">
         @include('partials.stepper', ['steps' => $stepLabels, 'current' => $position])
     </div>
@@ -118,5 +123,89 @@
     form?.addEventListener('submit', () => {
         if (window.OB) window.OB.setLoading('#ob-next-btn', true, '{{ __('Saving…') }}');
     });
+
+    /* ----------------------------------------------------------------
+     | Credit-threshold bottom sheet
+     | ----------------------------------------------------------------
+     | Auto-opens when the server rendered it (first company step, unanswered).
+     | Sí/No post the answer via fetch and close; closing any other way leaves
+     | the default (No) and is still changeable on the Documentos step. The
+     | server won't render it again this session once answered, so there's no
+     | re-pop on Back. */
+    (function () {
+        const sheet = document.querySelector('[data-credit-sheet]');
+        if (!sheet) return;
+
+        const url   = sheet.dataset.creditSheetUrl;
+        const token = document.querySelector('meta[name="csrf-token"]')?.content;
+        const panel = sheet.querySelector('.ob-sheet__panel');
+        let lastFocus = null;
+
+        const open = () => {
+            lastFocus = document.activeElement;
+            sheet.hidden = false;
+            document.body.classList.add('ob-sheet-open');
+            // next frame so the transition runs from the hidden state
+            requestAnimationFrame(() => {
+                sheet.classList.add('is-open');
+                (panel.querySelector('[data-credit-sheet-answer="1"]') || panel).focus();
+            });
+        };
+
+        const hide = () => {
+            sheet.classList.remove('is-open');
+            document.body.classList.remove('ob-sheet-open');
+            const done = () => { sheet.hidden = true; panel.removeEventListener('transitionend', done); };
+            panel.addEventListener('transitionend', done);
+            // fallback if transitionend doesn't fire (reduced motion)
+            setTimeout(() => { if (!sheet.classList.contains('is-open')) sheet.hidden = true; }, 350);
+            if (lastFocus && lastFocus.focus) lastFocus.focus();
+        };
+
+        const post = (payload) => {
+            // fire-and-forget; the UI closes regardless of the result
+            try {
+                return fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token,
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+            } catch (e) {
+                if (window.console) console.warn('credit-threshold save failed', e);
+            }
+        };
+
+        let settled = false;   // ensure we record exactly one outcome
+        const answer = (value) => { if (settled) return; settled = true; post({ credit_over_threshold: value ? 1 : 0 }); hide(); };
+        // Dismiss still records "asked" so the sheet doesn't re-pop on later
+        // steps; it leaves the value at its default (No), changeable on-step.
+        const dismiss = () => { if (settled) return; settled = true; post({ dismissed: 1 }); hide(); };
+
+        // Wire controls
+        sheet.querySelectorAll('[data-credit-sheet-answer]').forEach((btn) => {
+            btn.addEventListener('click', () => answer(btn.dataset.creditSheetAnswer === '1'));
+        });
+        sheet.querySelectorAll('[data-credit-sheet-dismiss]').forEach((el) => {
+            el.addEventListener('click', dismiss);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !sheet.hidden) dismiss();
+        });
+        // Simple focus trap inside the panel
+        sheet.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab' || sheet.hidden) return;
+            const f = panel.querySelectorAll('button:not([disabled])');
+            if (!f.length) return;
+            const first = f[0], last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
+
+        open();
+    })();
 </script>
 @endpush

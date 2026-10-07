@@ -95,6 +95,13 @@ class WizardController extends Controller
             $payload = app(\App\Services\Payload\PayloadMapper::class)->build();
         }
 
+        // Ask the ">$300,000 credit" question in a bottom sheet once, on the
+        // first company step, before it's been answered. It writes the same
+        // flag the Documentos step reads, so the step toggle stays in sync.
+        $askCreditThreshold = $flow->type === 'company'
+            && $flow->isFirst($step)
+            && ! $this->state->creditThresholdAsked();
+
         return view('wizard.shell', [
             'flow'        => $flow,
             'step'        => $step,
@@ -107,7 +114,46 @@ class WizardController extends Controller
             'isFirst'     => $flow->isFirst($step),
             'isLast'      => $flow->isLast($step),
             'stepLabels'  => $flow->labels(),
+            'askCreditThreshold' => $askCreditThreshold,
         ]);
+    }
+
+    /* ----------------------------------------------------------------
+     | Persist the up-front ">$300,000 credit" answer (bottom sheet)
+     | ----------------------------------------------------------------
+     | Called by the bottom sheet via fetch(). Writes the flag into the
+     | Documentos step data so the step renders in sync. Company flow only;
+     | ignored once Documentos is completed so it can't rewrite a finished
+     | step. Returns JSON (no redirect — the user stays on the current step).
+     | ---------------------------------------------------------------- */
+
+    public function creditThreshold(Request $request): \Illuminate\Http\JsonResponse
+    {
+        if (! $this->state->exists() || $this->state->type() !== 'company') {
+            return response()->json(['ok' => false], 422);
+        }
+
+        // Dismiss (Esc / skip / backdrop): record that the sheet was shown so
+        // it doesn't re-pop on later steps, but leave the value at its default
+        // (the user can still set it on the Documentos step).
+        if ($request->boolean('dismissed')) {
+            $this->state->markCreditThresholdAsked();
+            return response()->json(['ok' => true, 'dismissed' => true]);
+        }
+
+        // Don't overwrite a Documentos step the user already completed.
+        if ($this->state->isCompleted('documents')) {
+            $this->state->markCreditThresholdAsked();
+            return response()->json(['ok' => true, 'locked' => true]);
+        }
+
+        $validated = $request->validate([
+            'credit_over_threshold' => ['required', 'boolean'],
+        ]);
+
+        $this->state->setCreditThreshold((bool) $validated['credit_over_threshold']);
+
+        return response()->json(['ok' => true]);
     }
 
     /* ----------------------------------------------------------------

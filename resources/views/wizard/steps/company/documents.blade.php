@@ -23,7 +23,7 @@
         data-ob-toggle="credit-docs"
         {{ old('credit_over_threshold', $data['credit_over_threshold'] ?? false) ? 'checked' : '' }}>
     <label class="form-check-label" for="credit_over_threshold">
-        {{ __('Will you request credit over $300,000?') }}
+        {{ __('Will your credit line be over $300,000?') }}
     </label>
 </div>
 

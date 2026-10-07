@@ -164,6 +164,33 @@ class WizardState
         }
     }
 
+    /* ----------------------------------------------------------------
+     | Credit-threshold bottom sheet
+     | ----------------------------------------------------------------
+     | The ">$300,000 credit" question can be answered up front in a bottom
+     | sheet (shown once after Persona Moral) OR on the Documentos step. The
+     | authoritative value lives in the Documentos step data under
+     | 'credit_over_threshold'; this flag only records that the sheet has been
+     | shown/answered so it doesn't re-pop on Back navigation. */
+
+    public function creditThresholdAsked(): bool
+    {
+        return (bool) ($this->bag()['credit_threshold_asked'] ?? false);
+    }
+
+    public function markCreditThresholdAsked(): void
+    {
+        $this->put('credit_threshold_asked', true);
+    }
+
+    /** Persist the up-front answer into the Documentos step data, where the
+     *  step view and DocumentsRequest already read it from. */
+    public function setCreditThreshold(bool $value): void
+    {
+        $this->setStepData('documents', ['credit_over_threshold' => $value]);
+        $this->markCreditThresholdAsked();
+    }
+
     public function completedSteps(): array
     {
         return $this->bag()['completed'] ?? [];

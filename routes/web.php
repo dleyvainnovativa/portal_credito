@@ -29,4 +29,9 @@ Route::prefix('onboarding')->group(function () {
     Route::get('/back/{step}',  [WizardController::class, 'back'])->name('wizard.back');
     Route::post('/submit',      [WizardController::class, 'submit'])->name('wizard.submit');
     Route::post('/cancel',      [WizardController::class, 'cancel'])->name('wizard.cancel');
+
+    // Up-front ">$300,000 credit" answer from the bottom sheet (company flow).
+    // Writes the credit_over_threshold flag the Documentos step reads. JSON.
+    Route::post('/credit-threshold', [WizardController::class, 'creditThreshold'])
+        ->name('wizard.credit-threshold');
 });
