@@ -3,11 +3,12 @@
 | partials/credit-threshold-sheet.blade.php — ">$300,000 credit" bottom sheet
 |--------------------------------------------------------------------------
 | Shown once, on the first step of either flow, to ask the credit-line
-| question up front. Posts the answer to wizard.credit-threshold via fetch
-| (no reload); the credit-docs step reads the same flag (Documentos for
-| company, Documentación de Soporte for individual), so its inline toggle
-| stays the editable source of truth. Closing without choosing leaves the
-| default (No) and the user can still set it on that step.
+| question up front. The decision is required: the sheet cannot be dismissed
+| (no backdrop click, no Esc, no close handle). Sí/No post the answer to
+| wizard.credit-threshold via fetch (no reload); the credit-docs step reads
+| the same flag (Documentos for company, Documentación de Soporte for
+| individual), so its inline toggle stays the editable source of truth.
+| "Regresarme" leaves the flow and returns to the welcome page.
 |
 | Bottom-anchored on all sizes (wider/centered on desktop). Pure HTML/CSS/JS
 | — no library. Behavior is wired by the script in wizard/shell.blade.php,
@@ -25,11 +26,10 @@
     aria-describedby="credit-sheet-desc"
     hidden>
 
-    <div class="ob-sheet__backdrop" data-credit-sheet-dismiss></div>
+    <div class="ob-sheet__backdrop"></div>
 
     <div class="ob-sheet__panel" role="document">
-        <button type="button" class="ob-sheet__handle" aria-label="{{ __('Close') }}"
-            data-credit-sheet-dismiss></button>
+        <span class="ob-sheet__handle" aria-hidden="true"></span>
 
         <div class="ob-sheet__body">
             <span class="ob-sheet__icon" aria-hidden="true">
@@ -55,9 +55,9 @@
                 </button>
             </div>
 
-            <button type="button" class="ob-sheet__skip" data-credit-sheet-dismiss>
-                {{ __('I would rather decide later') }}
-            </button>
+            <a href="{{ route('wizard.start') }}" class="ob-sheet__skip">
+                {{ __('Go back') }}
+            </a>
         </div>
     </div>
 </div>

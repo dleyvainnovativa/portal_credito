@@ -159,11 +159,11 @@
     /* ----------------------------------------------------------------
      | Credit-threshold bottom sheet
      | ----------------------------------------------------------------
-     | Auto-opens when the server rendered it (first company step, unanswered).
-     | Sí/No post the answer via fetch and close; closing any other way leaves
-     | the default (No) and is still changeable on the Documentos step. The
-     | server won't render it again this session once answered, so there's no
-     | re-pop on Back. */
+     | Auto-opens when the server rendered it (first step, unanswered). The
+     | decision is required: Sí/No post the answer via fetch and close. There
+     | is no dismiss path — backdrop clicks and Esc do nothing — so the user
+     | must choose, or use "Regresarme" (a plain link) to leave the flow. The
+     | server won't render it again this session once answered. */
     (function () {
         const sheet = document.querySelector('[data-credit-sheet]');
         if (!sheet) return;
@@ -213,24 +213,20 @@
 
         let settled = false;   // ensure we record exactly one outcome
         const answer = (value) => { if (settled) return; settled = true; post({ credit_over_threshold: value ? 1 : 0 }); hide(); };
-        // Dismiss still records "asked" so the sheet doesn't re-pop on later
-        // steps; it leaves the value at its default (No), changeable on-step.
-        const dismiss = () => { if (settled) return; settled = true; post({ dismissed: 1 }); hide(); };
 
-        // Wire controls
+        // Wire the Sí/No answers. There is intentionally no dismiss path: the
+        // question must be answered (or the user leaves via "Regresarme").
         sheet.querySelectorAll('[data-credit-sheet-answer]').forEach((btn) => {
             btn.addEventListener('click', () => answer(btn.dataset.creditSheetAnswer === '1'));
         });
-        sheet.querySelectorAll('[data-credit-sheet-dismiss]').forEach((el) => {
-            el.addEventListener('click', dismiss);
-        });
+        // Swallow Esc so it can't close the sheet.
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !sheet.hidden) dismiss();
+            if (e.key === 'Escape' && !sheet.hidden) e.preventDefault();
         });
-        // Simple focus trap inside the panel
+        // Simple focus trap inside the panel (buttons + the "Regresarme" link).
         sheet.addEventListener('keydown', (e) => {
             if (e.key !== 'Tab' || sheet.hidden) return;
-            const f = panel.querySelectorAll('button:not([disabled])');
+            const f = panel.querySelectorAll('button:not([disabled]), a[href]');
             if (!f.length) return;
             const first = f[0], last = f[f.length - 1];
             if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
