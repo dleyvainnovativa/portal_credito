@@ -96,10 +96,10 @@ class WizardController extends Controller
         }
 
         // Ask the ">$300,000 credit" question in a bottom sheet once, on the
-        // first company step, before it's been answered. It writes the same
-        // flag the Documentos step reads, so the step toggle stays in sync.
-        $askCreditThreshold = $flow->type === 'company'
-            && $flow->isFirst($step)
+        // first step of either flow, before it's been answered. It writes the
+        // same flag the credit-docs step reads (Documentos for company,
+        // Documentación de Soporte for individual), so the toggle stays in sync.
+        $askCreditThreshold = $flow->isFirst($step)
             && ! $this->state->creditThresholdAsked();
 
         return view('wizard.shell', [
@@ -122,27 +122,31 @@ class WizardController extends Controller
      | Persist the up-front ">$300,000 credit" answer (bottom sheet)
      | ----------------------------------------------------------------
      | Called by the bottom sheet via fetch(). Writes the flag into the
-     | Documentos step data so the step renders in sync. Company flow only;
-     | ignored once Documentos is completed so it can't rewrite a finished
+     | credit-docs step data so that step renders in sync. Works for both
+     | flows (company → Documentos, individual → Documentación de Soporte);
+     | ignored once that step is completed so it can't rewrite a finished
      | step. Returns JSON (no redirect — the user stays on the current step).
      | ---------------------------------------------------------------- */
 
     public function creditThreshold(Request $request): \Illuminate\Http\JsonResponse
     {
-        if (! $this->state->exists() || $this->state->type() !== 'company') {
+        if (! $this->state->exists()) {
             return response()->json(['ok' => false], 422);
         }
 
+        // The flow-specific step that hosts the credit checkbox.
+        $creditStep = $this->state->creditDocsStepKey();
+
         // Dismiss (Esc / skip / backdrop): record that the sheet was shown so
         // it doesn't re-pop on later steps, but leave the value at its default
-        // (the user can still set it on the Documentos step).
+        // (the user can still set it on the credit-docs step).
         if ($request->boolean('dismissed')) {
             $this->state->markCreditThresholdAsked();
             return response()->json(['ok' => true, 'dismissed' => true]);
         }
 
-        // Don't overwrite a Documentos step the user already completed.
-        if ($this->state->isCompleted('documents')) {
+        // Don't overwrite the credit-docs step if the user already completed it.
+        if ($this->state->isCompleted($creditStep)) {
             $this->state->markCreditThresholdAsked();
             return response()->json(['ok' => true, 'locked' => true]);
         }

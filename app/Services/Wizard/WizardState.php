@@ -183,11 +183,18 @@ class WizardState
         $this->put('credit_threshold_asked', true);
     }
 
-    /** Persist the up-front answer into the Documentos step data, where the
-     *  step view and DocumentsRequest already read it from. */
+    /** Step key that hosts the credit-over-threshold checkbox for this flow:
+     *  'documents' (company) or 'identification' (individual). */
+    public function creditDocsStepKey(): string
+    {
+        return $this->type() === 'company' ? 'documents' : 'identification';
+    }
+
+    /** Persist the up-front answer into the credit-docs step data, where that
+     *  step's view and FormRequest already read it from. */
     public function setCreditThreshold(bool $value): void
     {
-        $this->setStepData('documents', ['credit_over_threshold' => $value]);
+        $this->setStepData($this->creditDocsStepKey(), ['credit_over_threshold' => $value]);
         $this->markCreditThresholdAsked();
     }
 
