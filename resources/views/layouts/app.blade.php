@@ -133,6 +133,11 @@
 
     </div>
 
+    {{-- Modals live here, as direct children of <body>, so their fixed
+         backdrop covers the full viewport and never gets confined by the
+         sticky header or any transformed ancestor. --}}
+    @stack('modals')
+
     {{-- Toast container is created on demand by OB.toast(), no markup needed here --}}
     @stack('scripts')
 </body>

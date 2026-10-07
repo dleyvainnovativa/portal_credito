@@ -17,14 +17,46 @@
 @section('side-image', ($flow->type === 'company' ? 'moral' : 'fisica') . '/' . $position)
 
 @section('header-actions')
-    <form method="POST" action="{{ route('wizard.cancel') }}"
-          onsubmit="return confirm('{{ __('Discard this application and start over?') }}');">
-        @csrf
-        <button type="submit" class="btn btn-sm btn-outline-secondary">
-            <i class="fa-solid fa-xmark me-1" aria-hidden="true"></i>{{ __('Cancel') }}
-        </button>
-    </form>
+    {{-- Opens the confirmation modal instead of a native confirm() dialog.
+         The modal itself is pushed to the body-level 'modals' stack below. --}}
+    <button type="button" class="btn btn-sm btn-outline-secondary"
+            data-bs-toggle="modal" data-bs-target="#cancel-modal">
+        <i class="fa-solid fa-xmark me-1" aria-hidden="true"></i>{{ __('Cancel') }}
+    </button>
 @endsection
+
+{{-- Discard-application confirmation, rendered at the end of <body> so its
+     backdrop covers the whole viewport and locks all interaction. The
+     "discard" button submits the wizard.cancel form; dismissing keeps the
+     in-progress application. --}}
+@push('modals')
+    <div class="modal fade" id="cancel-modal" tabindex="-1"
+         aria-labelledby="cancel-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancel-modal-title">{{ __('Cancel') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="{{ __('Close') }}"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">{{ __('Discard this application and start over?') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        {{ __('No, keep my application') }}
+                    </button>
+                    <form method="POST" action="{{ route('wizard.cancel') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa-solid fa-xmark me-1" aria-hidden="true"></i>{{ __('Yes, discard') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
 
 @section('content')
     {{-- Up-front ">$300,000 credit" question (company flow, first step, once). --}}
