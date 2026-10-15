@@ -612,7 +612,9 @@ a:hover { color: var(--ob-primary-hover); }
     background: var(--ob-surface);
     border-radius: var(--ob-radius-lg) var(--ob-radius-lg) 0 0;
     box-shadow: var(--ob-shadow-lg);
-    padding: .5rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+    padding: 1.5rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - 1.5rem);   /* never taller than the viewport */
+    overflow-y: auto;
     transform: translateY(100%);
     transition: transform var(--ob-dur) var(--ob-ease);
     will-change: transform;
@@ -634,7 +636,7 @@ a:hover { color: var(--ob-primary-hover); }
 }
 
 .ob-sheet__handle {
-    display: block;
+    display: none;
     width: 40px;
     height: 4px;
     margin: .5rem auto 1rem;
@@ -700,3 +702,147 @@ a:hover { color: var(--ob-primary-hover); }
 
 /* Lock background scroll while open (class added to <body> by the script). */
 body.ob-sheet-open { overflow: hidden; }
+
+/* Hidden step panels (toggled by the sheet script via the [hidden] attr). */
+.ob-sheet__body[hidden] { display: none; }
+
+/* Step progress dots */
+.ob-sheet__steps {
+    display: flex;
+    justify-content: center;
+    gap: .375rem;
+    margin-top: 1rem;
+}
+.ob-sheet__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: var(--ob-radius-pill);
+    background: var(--ob-border-strong);
+    transition: background var(--ob-dur) var(--ob-ease), width var(--ob-dur) var(--ob-ease);
+}
+.ob-sheet__dot.is-active {
+    width: 22px;
+    background: var(--ob-primary);
+}
+
+/* Custom "accept" checkbox (privacy step) */
+.ob-check {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    text-align: left;
+    padding: .875rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--ob-border);
+    border-radius: var(--ob-radius);
+    background: var(--ob-surface-alt);
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+}
+.ob-check:has(.ob-check__input:checked) {
+    border-color: var(--ob-primary);
+    background: var(--ob-primary-soft);
+}
+.ob-check__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.ob-check__box {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    border: 2px solid var(--ob-border-strong);
+    border-radius: var(--ob-radius-sm);
+    background: var(--ob-surface);
+    color: #fff;
+    font-size: .75rem;
+    transition: border-color .15s ease, background .15s ease;
+}
+.ob-check__box > i { opacity: 0; transform: scale(.6); transition: opacity .15s ease, transform .15s ease; }
+.ob-check__input:checked + .ob-check__box {
+    border-color: var(--ob-primary);
+    background: var(--ob-primary);
+}
+.ob-check__input:checked + .ob-check__box > i { opacity: 1; transform: scale(1); }
+.ob-check__input:focus-visible + .ob-check__box {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--ob-primary-ring);
+}
+.ob-check__label {
+    font-size: .9375rem;
+    line-height: 1.45;
+    color: var(--ob-text);
+}
+.ob-check__label a { font-weight: 600; }
+
+/* Styled radio option cards (credit range) */
+.ob-choices {
+    display: grid;
+    gap: .5rem;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border: 0;
+    text-align: left;
+}
+.ob-choice { display: block; cursor: pointer; }
+.ob-choice__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.ob-choice__box {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .875rem 1rem;
+    border: 1.5px solid var(--ob-border);
+    border-radius: var(--ob-radius);
+    background: var(--ob-surface);
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.ob-choice__box::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--ob-border-strong);
+    transition: border-color .15s ease, background .15s ease;
+}
+.ob-choice:hover .ob-choice__box { border-color: var(--ob-border-strong); }
+.ob-choice__input:checked + .ob-choice__box {
+    border-color: var(--ob-primary);
+    background: var(--ob-primary-soft);
+}
+.ob-choice__input:checked + .ob-choice__box::before {
+    border-color: var(--ob-primary);
+    background: radial-gradient(circle, var(--ob-primary) 0 5px, transparent 6px);
+}
+.ob-choice__input:focus-visible + .ob-choice__box {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--ob-primary-ring);
+}
+.ob-choice__label {
+    font-weight: 600;
+    font-size: .9375rem;
+    color: var(--ob-text);
+}
+
+/* Labeled field (service select) */
+.ob-field { text-align: left; margin-bottom: 1.25rem; padding-top: 2.25rem;
+    padding-bottom: 4rem;}
+.ob-field__label {
+    display: block;
+    font-size: .9125rem;
+    font-weight: 600;
+    color: var(--ob-text);
+    margin-bottom: .375rem;
+    
+}

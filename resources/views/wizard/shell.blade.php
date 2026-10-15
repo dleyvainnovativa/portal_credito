@@ -157,13 +157,16 @@
     });
 
     /* ----------------------------------------------------------------
-     | Credit-threshold bottom sheet
+     | Intake bottom sheet (privacy → credit range + service)
      | ----------------------------------------------------------------
-     | Auto-opens when the server rendered it (first step, unanswered). The
-     | decision is required: Sí/No post the answer via fetch and close. There
-     | is no dismiss path — backdrop clicks and Esc do nothing — so the user
-     | must choose, or use "Regresarme" (a plain link) to leave the flow. The
-     | server won't render it again this session once answered. */
+     | Auto-opens when the server rendered it (first step, unanswered). It's a
+     | required two-step intake with no dismiss path — backdrop clicks and Esc
+     | do nothing — so the user must complete it or leave via "Regresarme".
+     |   Step 1: accept the Aviso de Privacidad to continue.
+     |   Step 2: pick a credit-line range + a service, then Continuar.
+     | Only the credit flag is posted for now: "Más de $300,000" → 1, else 0
+     | (wired to the existing credit_over_threshold mechanism). The chosen
+     | range and service are visual-only until we wire their persistence. */
     (function () {
         const sheet = document.querySelector('[data-credit-sheet]');
         if (!sheet) return;
@@ -171,16 +174,25 @@
         const url   = sheet.dataset.creditSheetUrl;
         const token = document.querySelector('meta[name="csrf-token"]')?.content;
         const panel = sheet.querySelector('.ob-sheet__panel');
+
+        const steps    = { privacy: sheet.querySelector('[data-sheet-step="privacy"]'),
+                            credit:  sheet.querySelector('[data-sheet-step="credit"]') };
+        const dots      = sheet.querySelectorAll('[data-sheet-dot]');
+        const privacy   = sheet.querySelector('[data-credit-sheet-privacy]');
+        const nextBtn   = sheet.querySelector('[data-credit-sheet-next]');
+        const backBtn   = sheet.querySelector('[data-credit-sheet-back]');
+        const submitBtn = sheet.querySelector('[data-credit-sheet-submit]');
+        const service   = sheet.querySelector('[data-credit-sheet-service]');
+        const ranges    = sheet.querySelectorAll('input[name="credit_range"]');
         let lastFocus = null;
 
         const open = () => {
             lastFocus = document.activeElement;
             sheet.hidden = false;
             document.body.classList.add('ob-sheet-open');
-            // next frame so the transition runs from the hidden state
             requestAnimationFrame(() => {
                 sheet.classList.add('is-open');
-                (panel.querySelector('[data-credit-sheet-answer="1"]') || panel).focus();
+                (privacy || panel).focus();
             });
         };
 
@@ -189,13 +201,11 @@
             document.body.classList.remove('ob-sheet-open');
             const done = () => { sheet.hidden = true; panel.removeEventListener('transitionend', done); };
             panel.addEventListener('transitionend', done);
-            // fallback if transitionend doesn't fire (reduced motion)
             setTimeout(() => { if (!sheet.classList.contains('is-open')) sheet.hidden = true; }, 350);
             if (lastFocus && lastFocus.focus) lastFocus.focus();
         };
 
         const post = (payload) => {
-            // fire-and-forget; the UI closes regardless of the result
             try {
                 return fetch(url, {
                     method: 'POST',
@@ -211,28 +221,57 @@
             }
         };
 
-        let settled = false;   // ensure we record exactly one outcome
-        const answer = (value) => { if (settled) return; settled = true; post({ credit_over_threshold: value ? 1 : 0 }); hide(); };
+        // --- Step switching -------------------------------------------------
+        const show = (name) => {
+            Object.entries(steps).forEach(([k, el]) => { if (el) el.hidden = (k !== name); });
+            dots.forEach((d) => d.classList.toggle('is-active', d.dataset.sheetDot === name));
+            const focusTarget = name === 'privacy'
+                ? privacy
+                : (sheet.querySelector('input[name="credit_range"]:checked') || ranges[0]);
+            requestAnimationFrame(() => focusTarget && focusTarget.focus && focusTarget.focus());
+        };
 
-        // Wire the Sí/No answers. There is intentionally no dismiss path: the
-        // question must be answered (or the user leaves via "Regresarme").
-        sheet.querySelectorAll('[data-credit-sheet-answer]').forEach((btn) => {
-            btn.addEventListener('click', () => answer(btn.dataset.creditSheetAnswer === '1'));
+        // --- Validation gates ----------------------------------------------
+        const selectedRange = () => sheet.querySelector('input[name="credit_range"]:checked');
+        const refreshNext = () => { if (nextBtn) nextBtn.disabled = !(privacy && privacy.checked); };
+        const refreshSubmit = () => {
+            if (submitBtn) submitBtn.disabled = !(selectedRange() && service && service.value);
+        };
+
+        privacy?.addEventListener('change', refreshNext);
+        ranges.forEach((r) => r.addEventListener('change', refreshSubmit));
+        service?.addEventListener('change', refreshSubmit);
+
+        nextBtn?.addEventListener('click', () => { if (privacy && privacy.checked) show('credit'); });
+        backBtn?.addEventListener('click', () => show('privacy'));
+
+        let settled = false;   // ensure we record exactly one outcome
+        submitBtn?.addEventListener('click', () => {
+            if (settled) return;
+            const range = selectedRange();
+            if (!range || !service || !service.value) return;
+            settled = true;
+            post({ credit_over_threshold: range.dataset.creditOver === '1' ? 1 : 0 });
+            hide();
         });
+
         // Swallow Esc so it can't close the sheet.
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !sheet.hidden) e.preventDefault();
         });
-        // Simple focus trap inside the panel (buttons + the "Regresarme" link).
+        // Focus trap confined to the controls of the currently visible step.
         sheet.addEventListener('keydown', (e) => {
             if (e.key !== 'Tab' || sheet.hidden) return;
-            const f = panel.querySelectorAll('button:not([disabled]), a[href]');
+            const current = steps.privacy && !steps.privacy.hidden ? steps.privacy : steps.credit;
+            const f = current.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled])');
             if (!f.length) return;
             const first = f[0], last = f[f.length - 1];
             if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
             else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
 
+        refreshNext();
+        refreshSubmit();
         open();
     })();
 </script>
