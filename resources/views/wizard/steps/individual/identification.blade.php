@@ -51,21 +51,16 @@
 'storedName' => $files['tax_certificate']['original_name'] ?? null,
 ])
 
-<hr style="border-color: var(--ob-border);">
+@php $overThreshold = (bool) old('credit_over_threshold', $data['credit_over_threshold'] ?? false); @endphp
 <input type="hidden" name="credit_docs_step" value="1">
-<div class="form-check mb-3">
-    <input class="form-check-input" type="checkbox" value="1"
-        id="credit_over_threshold" name="credit_over_threshold"
-        data-ob-toggle="credit-docs"
-        {{ old('credit_over_threshold', $data['credit_over_threshold'] ?? false) ? 'checked' : '' }}>
-    <label class="form-check-label" for="credit_over_threshold">
-        {{ __('Will you request credit over $300,000?') }}
-    </label>
-</div>
+{{-- The credit-line range is chosen up front in the intake sheet, so the old
+     ">$300,000" checkbox is gone. This hidden input carries the derived flag so
+     validation and the conditional-doc reveal stay driven by the chosen tier. --}}
+<input type="hidden" name="credit_over_threshold" value="{{ $overThreshold ? 1 : 0 }}">
 
-{{-- Revealed only when the checkbox is on. `hidden` is toggled by app.js. --}}
-<div id="credit-docs" class="row g-3" data-ob-toggle-target="credit-docs"
-    @unless(old('credit_over_threshold', $data['credit_over_threshold'] ?? false)) hidden @endunless>
+@if ($overThreshold)
+<hr style="border-color: var(--ob-border);">
+<div id="credit-docs" class="row g-3">
 
     <p class="form-label mb-2">{{ __('Last 2 annual tax returns') }}<span class="ob-req">*</span></p>
     <div class="col-md-6">
@@ -112,3 +107,4 @@
         ])
     </div>
 </div>
+@endif

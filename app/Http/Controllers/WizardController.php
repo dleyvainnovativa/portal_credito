@@ -119,13 +119,13 @@ class WizardController extends Controller
     }
 
     /* ----------------------------------------------------------------
-     | Persist the up-front ">$300,000 credit" answer (bottom sheet)
+     | Persist the intake-sheet answers (credit range + service)
      | ----------------------------------------------------------------
-     | Called by the bottom sheet via fetch(). Writes the flag into the
-     | credit-docs step data so that step renders in sync. Works for both
-     | flows (company → Documentos, individual → Documentación de Soporte);
-     | ignored once that step is completed so it can't rewrite a finished
-     | step. Returns JSON (no redirect — the user stays on the current step).
+     | Called by the intake bottom sheet via fetch(). Stores the credit range
+     | and service into the credit-docs step data (company → Documentos,
+     | individual → Documentación de Soporte); credit_over_threshold is derived
+     | from the range. Ignored once that step is completed so it can't rewrite a
+     | finished step. Returns JSON (no redirect — the user stays on the step).
      | ---------------------------------------------------------------- */
 
     public function creditThreshold(Request $request): \Illuminate\Http\JsonResponse
@@ -134,28 +134,21 @@ class WizardController extends Controller
             return response()->json(['ok' => false], 422);
         }
 
-        // The flow-specific step that hosts the credit checkbox.
-        $creditStep = $this->state->creditDocsStepKey();
-
-        // Dismiss (Esc / skip / backdrop): record that the sheet was shown so
-        // it doesn't re-pop on later steps, but leave the value at its default
-        // (the user can still set it on the credit-docs step).
-        if ($request->boolean('dismissed')) {
-            $this->state->markCreditThresholdAsked();
-            return response()->json(['ok' => true, 'dismissed' => true]);
-        }
-
         // Don't overwrite the credit-docs step if the user already completed it.
-        if ($this->state->isCompleted($creditStep)) {
+        if ($this->state->isCompleted($this->state->creditDocsStepKey())) {
             $this->state->markCreditThresholdAsked();
             return response()->json(['ok' => true, 'locked' => true]);
         }
 
         $validated = $request->validate([
-            'credit_over_threshold' => ['required', 'boolean'],
+            'credit_range'        => ['required', \Illuminate\Validation\Rule::in(WizardState::CREDIT_RANGES)],
+            'service_to_contract' => ['nullable', \Illuminate\Validation\Rule::in(array_keys(config('contisign.service_line_directors', [])))],
         ]);
 
-        $this->state->setCreditThreshold((bool) $validated['credit_over_threshold']);
+        $this->state->setIntake(
+            $validated['credit_range'],
+            $validated['service_to_contract'] ?? null,
+        );
 
         return response()->json(['ok' => true]);
     }

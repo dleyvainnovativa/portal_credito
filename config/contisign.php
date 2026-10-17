@@ -75,22 +75,9 @@ return [
     */
     'templates' => [
 
-        'solicitud' => [
-            'id'         => env('CONTISIGN_TPL_SOLICITUD_ID', '626e9807-2070-4d89-ae52-acb5bbe15557'),
-            'name'       => '00.SOLICITUD DE CRÉDITO (PORTAL)',
-            'json_path'  => 'contisign/templates/solicitud_credito.json',
-            // 'signer'     => [
-            //     'name'  => 'Daniel',
-            //     'email' => 'dancaballerodlc@gmail.com',
-            //     'phone' => '2291645189',
-            // ],
-            'signer'     => [
-                'name'  => 'Silvana',
-                'email' => 'silvanal@sistemascontino.com.mx',
-                'phone' => '2299581884',
-            ],
-        ],
-
+        // Buró is unchanged: one template, signed by the client (contact /
+        // representative). Signers for the SOLICITUD come from the template
+        // itself now (see 'solicitud_templates' below), not from here.
         'buro' => [
             'id'        => env('CONTISIGN_TPL_BURO_ID', '61ee9d8a-1acb-4349-b190-fd125995d676'),
             'name'      => '00.BURO DE CREDITO (con Correo institucional)',
@@ -98,5 +85,56 @@ return [
             'signer'    => 'client', // client name/email/phone from the contact step
         ],
     ],
+
+    /*
+    | SOLICITUD DE CRÉDITO — one template per credit-line range. The applicant
+    | picks a range in the intake sheet (credit_range); the chosen template
+    | carries its own internal approver chain WITH positions baked into its
+    | UserSigns, so the submission layer sends those signers verbatim and only
+    | fills the single "DIRECTOR DE LINEA" slot (the UserSigns entry with an
+    | empty email) with the service line director resolved below.
+    |
+    |   under_150k → 3 signers  (Yiselle, Silvana, Director de Línea)
+    |   150k_300k  → 4 signers  (+ Enrique Arellano)
+    |   over_300k  → 5 signers  (+ Luis Manuel Rodríguez) and the 4 extra docs
+    */
+    'solicitud_templates' => [
+        'under_150k' => [
+            'id'        => env('CONTISIGN_TPL_SOLICITUD_MENOS150_ID', '57e36ed1-3580-4687-bce4-7a69e1644481'),
+            'name'      => '00.SOLICITUD DE CRÉDITO menos de 150,000',
+            'json_path' => 'contisign/templates/solicitud_menos_150.json',
+        ],
+        '150k_300k' => [
+            'id'        => env('CONTISIGN_TPL_SOLICITUD_150A300_ID', '6c90aae4-2432-4ac6-8cb0-ed1c6e49a9a6'),
+            'name'      => '00.SOLICITUD DE CRÉDITO de 150,000 a 300,000',
+            'json_path' => 'contisign/templates/solicitud_150_300.json',
+        ],
+        'over_300k' => [
+            'id'        => env('CONTISIGN_TPL_SOLICITUD_MAS300_ID', '3a6f1b17-ea65-4721-9a8c-15e5ff911e4b'),
+            'name'      => '00.SOLICITUD DE CRÉDITO más de 300,000',
+            'json_path' => 'contisign/templates/solicitud_mas_300.json',
+        ],
+    ],
+
+    // Fallback tier if credit_range is ever missing/unknown at submit time.
+    'solicitud_default_tier' => 'under_150k',
+
+    /*
+    | Service → "Director de Línea" dynamic signer for the SOLICITUD. The
+    | selected service (service_to_contract) resolves to the person who fills
+    | the empty-email UserSigns slot. PLACEHOLDERS for now — swap for the real
+    | line directors. 'phone' matters because the templates set requireSMS=true.
+    */
+    'service_line_directors' => [
+        'computo'            => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+        'impresion'          => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+        'redes'              => ['name' => 'Daniel Redes', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+        'cyberseguridad'     => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+        'datacenter'         => ['name' => 'Daniel Datacenter', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+        'gestion_documental' => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+    ],
+
+    // Used when service is missing/unknown so the slot is never left empty.
+    'service_line_director_default' => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
 
 ];

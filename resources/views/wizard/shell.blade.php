@@ -251,7 +251,10 @@
             const range = selectedRange();
             if (!range || !service || !service.value) return;
             settled = true;
-            post({ credit_over_threshold: range.dataset.creditOver === '1' ? 1 : 0 });
+            post({
+                credit_range: range.value,
+                service_to_contract: service.value,
+            });
             hide();
         });
 

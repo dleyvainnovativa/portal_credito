@@ -51,7 +51,27 @@ class PayloadMapper
             'references'     => $this->references(),
             'documents'      => $this->documents($type),
             'authorization'  => $this->authorization(),
+            // Intake-sheet answers: the credit range selects the solicitud
+            // template, the service selects the dynamic "Director de Línea"
+            // signer. Both live in the credit-docs step data.
+            'credit_range'   => $this->creditRange(),
+            'service'        => $this->service(),
         ];
+    }
+
+    /** Credit-line range chosen in the intake sheet (drives the template). */
+    private function creditRange(): string
+    {
+        $range = $this->state->stepData($this->state->creditDocsStepKey())['credit_range'] ?? null;
+        return in_array($range, WizardState::CREDIT_RANGES, true)
+            ? $range
+            : 'under_150k';
+    }
+
+    /** Service chosen in the intake sheet (drives the dynamic signer). */
+    private function service(): ?string
+    {
+        return $this->state->stepData($this->state->creditDocsStepKey())['service_to_contract'] ?? null;
     }
 
     /* ----------------------------------------------------------------

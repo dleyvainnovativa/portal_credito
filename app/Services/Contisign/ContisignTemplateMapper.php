@@ -30,19 +30,19 @@ use RuntimeException;
 class ContisignTemplateMapper
 {
     /**
-     * @param string $templateKey 'solicitud'|'buro'
-     * @param array  $payload     normalized PayloadMapper output
+     * @param string $valueSet 'solicitud'|'buro' — selects the variable map.
+     * @param array  $cfg      resolved template config (must have 'json_path').
+     * @param array  $payload  normalized PayloadMapper output
      * @return array{html:string, dataTemplates:array, template:array}
      */
-    public function map(string $templateKey, array $payload): array
+    public function map(string $valueSet, array $cfg, array $payload): array
     {
-        $cfg = config("contisign.templates.$templateKey");
-        if (! $cfg) {
-            throw new RuntimeException("Unknown Contisign template [$templateKey].");
+        if (! $cfg || empty($cfg['json_path'])) {
+            throw new RuntimeException("Missing Contisign template config for [$valueSet].");
         }
 
         $template = $this->loadTemplate($cfg['json_path']);
-        $values   = $this->values($templateKey, $payload);
+        $values   = $this->values($valueSet, $payload);
 
         // Whether to send a filled `html` or let Contisign render server-side
         // from DataTemplates with an empty html. Toggle via config while we
@@ -249,10 +249,31 @@ class ContisignTemplateMapper
         if (! $disk->exists($path)) {
             throw new RuntimeException("Contisign template JSON not found at storage/app/$path");
         }
-        $json = json_decode($disk->get($path), true);
+
+        $raw = $this->stripLeadingComments((string) $disk->get($path));
+
+        $json = json_decode($raw, true);
         if (! is_array($json)) {
             throw new RuntimeException("Contisign template JSON at $path is invalid.");
         }
+        // Some panel exports wrap the object in a single-element array.
+        if (array_is_list($json) && isset($json[0]) && is_array($json[0])) {
+            $json = $json[0];
+        }
         return $json;
+    }
+
+    /**
+     * Contisign panel exports often prefix the JSON with a `// <name> id <uuid>`
+     * comment line. Drop any leading `//` comment lines so json_decode succeeds.
+     */
+    private function stripLeadingComments(string $raw): string
+    {
+        $raw = preg_replace('/^\xEF\xBB\xBF/', '', $raw); // strip BOM if present
+        $lines = preg_split('/\r\n|\r|\n/', $raw);
+        while (! empty($lines) && str_starts_with(ltrim($lines[0]), '//')) {
+            array_shift($lines);
+        }
+        return implode("\n", $lines);
     }
 }

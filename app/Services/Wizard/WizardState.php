@@ -190,11 +190,25 @@ class WizardState
         return $this->type() === 'company' ? 'documents' : 'identification';
     }
 
-    /** Persist the up-front answer into the credit-docs step data, where that
-     *  step's view and FormRequest already read it from. */
-    public function setCreditThreshold(bool $value): void
+    /** Valid credit-line ranges (the three intake-sheet options). */
+    public const CREDIT_RANGES = ['under_150k', '150k_300k', 'over_300k'];
+
+    /**
+     * Persist the intake-sheet answers into the credit-docs step data, where
+     * that step's view and FormRequest read them from. The credit_over_threshold
+     * flag is DERIVED from the range (only the top tier triggers the extra docs
+     * and the "más de 300,000" template), so the range stays the single source
+     * of truth. The service drives the dynamic solicitud signer.
+     */
+    public function setIntake(string $range, ?string $service): void
     {
-        $this->setStepData($this->creditDocsStepKey(), ['credit_over_threshold' => $value]);
+        $range = in_array($range, self::CREDIT_RANGES, true) ? $range : 'under_150k';
+
+        $this->setStepData($this->creditDocsStepKey(), [
+            'credit_range'          => $range,
+            'service_to_contract'   => $service,
+            'credit_over_threshold' => $range === 'over_300k',
+        ]);
         $this->markCreditThresholdAsked();
     }
 

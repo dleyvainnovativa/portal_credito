@@ -86,15 +86,11 @@ class ContisignSubmissionService
 
     private function submitTemplate(string $templateKey, array $payload): string
     {
-        $mapped   = $this->mapper->map($templateKey, $payload);
+        $cfg      = $this->resolveTemplateConfig($templateKey, $payload);
+        $mapped   = $this->mapper->map($templateKey, $cfg, $payload);
         $template = $mapped['template'];
-        $cfg      = config("contisign.templates.$templateKey");
-        // dd($templateKey, $payload, $mapped, $cfg);
-        if ($templateKey == "solicitud") {
-            $annexed = $this->buildAnnexed($payload);
-        } else {
-            $annexed = [];
-        }
+
+        $annexed = $templateKey === 'solicitud' ? $this->buildAnnexed($payload) : [];
 
         // 2. createUniKey
         $uniKey = $this->createUniKey($template);
@@ -106,6 +102,22 @@ class ContisignSubmissionService
 
         // $documentId = 'mocked-document-id';
         return $documentId;
+    }
+
+    /**
+     * Resolve the template config for a submission. The SOLICITUD varies by the
+     * applicant's credit-line range (3 templates); the BURÓ is fixed.
+     */
+    private function resolveTemplateConfig(string $templateKey, array $payload): array
+    {
+        if ($templateKey === 'solicitud') {
+            $default = config('contisign.solicitud_default_tier', 'under_150k');
+            $tier    = $payload['credit_range'] ?? $default;
+            return config("contisign.solicitud_templates.$tier")
+                ?? config("contisign.solicitud_templates.$default");
+        }
+
+        return config("contisign.templates.$templateKey");
     }
 
     /** Upload every collected document; flatten into the annexed[] array. */
@@ -182,7 +194,8 @@ class ContisignSubmissionService
             'ConstancePSC'    => $template['PSCreq'] ?? false,
             'OnlyNOM151'      => $template['OnlyNOM151'] ?? false,
             'Fields'          => null,
-            'requireSMS'      => $template['requireSMS'] ?? false,
+            'requireSMS'      => false,
+            // 'requireSMS'      => $template['requireSMS'] ?? false,
             'signatures'      => $this->buildSignatures($templateKey, $template, $payload),
         ];
 
@@ -221,89 +234,112 @@ class ContisignSubmissionService
     /* ----------------------------------------------------------------
      | Signatures
      | ----------------------------------------------------------------
-     | Buró  → signed by the client (contact name/email/phone).
-     | Solicitud → signed by the hardcoded signer from config.
+     | Buró      → one signer, the client (contact / representative).
+     | Solicitud → the template's full internal approver chain (sent verbatim
+     |             with baked-in positions) plus the service line director in
+     |             the single empty-email "DIRECTOR DE LINEA" slot.
      */
     private function buildSignatures(string $templateKey, array $template, array $payload): array
     {
-        $cfg = config("contisign.templates.$templateKey");
-        $signer = $cfg['signer'];
+        return $templateKey === 'buro'
+            ? $this->buroSignatures($template, $payload)
+            : $this->solicitudSignatures($template, $payload);
+    }
+
+    /**
+     * BURÓ — unchanged: a single signer (the client / representative) mapped
+     * onto the template's first UserSigns slot, one entry per SignType.
+     */
+    private function buroSignatures(array $template, array $payload): array
+    {
+        $cfg    = config('contisign.templates.buro');
+        $signer = $cfg['signer'] ?? 'client';
 
         if ($signer === 'client') {
-            if ($payload["applicant_type"] == "company") {
-                $contact = $payload['representative'] ?? [];
-                $name  = trim(($contact['first_name'] ?? '') . ' ' . ($contact['last_name'] ?? ''));
-                $email = $contact['email'] ?? '';
-                $phone = $contact['phone'] ?? '';
-            } else {
-                $contact = $payload['contact'] ?? [];
-                $name  = trim(($contact['first_name'] ?? '') . ' ' . ($contact['last_name'] ?? ''));
-                $email = $contact['email'] ?? '';
-                $phone = $contact['phone'] ?? '';
-            }
+            $contact = ($payload['applicant_type'] ?? null) === 'company'
+                ? ($payload['representative'] ?? [])
+                : ($payload['contact'] ?? []);
+            $name  = trim(($contact['first_name'] ?? '') . ' ' . ($contact['last_name'] ?? ''));
+            $email = $contact['email'] ?? '';
+            $phone = $contact['phone'] ?? '';
         } else {
             $name  = $signer['name'] ?? '';
             $email = $signer['email'] ?? '';
             $phone = $signer['phone'] ?? '';
         }
 
-        $userSign = $template['UserSigns'][0] ?? [];
+        $userSign  = $template['UserSigns'][0] ?? [];
         $limitDate = now()->addDays(30)->toIso8601String();
 
-        // dd($userSign);
         $signature = $userSign;
-        $signature["Name"] = $name;
-        $signature["Email"] = $email;
-        $signature["LimitDate"] = $limitDate;
-        $signature["PhoneNumber"] = $phone;
-        $signature["phone"] = (string) $phone;
-        $signature["AditionalInformation"]["name"] = $name;
+        $signature['Name']        = $name;
+        $signature['Email']       = $email;
+        $signature['LimitDate']   = $limitDate;
+        $signature['PhoneNumber'] = $phone;
+        $signature['phone']       = (string) $phone;
+        if (isset($signature['AditionalInformation']) && is_array($signature['AditionalInformation'])) {
+            $signature['AditionalInformation']['name'] = $name;
+        }
 
-        // $signature = [
-        //     'Name'         => $name,
-        //     'Email'        => $email,
-        //     'Charge'       => $userSign['Charge'] ?? 'Signed',
-        //     'Position'     => $userSign['Position'] ?? '',
-        //     'BusinessName' => $userSign['BusinessName'] ?? '',
-        //     'Order'        => $userSign['Order'] ?? 1,
-        //     'external'     => true,
-        //     'bgColor'      => $userSign['bgColor'] ?? '3dc108',
-        //     'x'            => $userSign['x'] ?? null,
-        //     'y'            => $userSign['y'] ?? null,
-        //     'width'        => $userSign['width'] ?? null,
-        //     'height'       => $userSign['height'] ?? null,
-        //     'dimension'    => $userSign['dimension'] ?? ['w' => 612, 'h' => 792],
-        //     'page'         => $userSign['page'] ?? 0,
-        //     'Status'       => 'Pendiente',
-        //     'editing'      => false,
-        //     'LimitDate'    => $limitDate,
-        //     'PhoneNumber'  => (string) $phone,
-        //     'phone'        => (string) $phone,
-        //     'AditionalInformation' => [
-        //         'xNorm'          => $userSign['xNorm'] ?? null,
-        //         'yNorm'          => $userSign['yNorm'] ?? null,
-        //         'wNorm'          => $userSign['wNorm'] ?? null,
-        //         'hNorm'          => $userSign['hNorm'] ?? null,
-        //         'page'       => $userSign['page'] ?? 0,
-        //         'x'          => $userSign['x'] ?? null,
-        //         'y'          => $userSign['y'] ?? null,
-        //         'width'      => $userSign['width'] ?? null,
-        //         'height'     => $userSign['height'] ?? null,
-        //         'name'       => $name,
-        //         'bgcolor'    => '#' . ($userSign['bgColor'] ?? '3dc108') . '99',
-        //         'dimensions' => $userSign['dimension'] ?? ['w' => 612, 'h' => 792],
-        //     ],
-        // ];
-
-        // One signature per SignType (matches the provided send_signatures.php).
         $signatures = [];
-        $types = $template['SignType'] ?? ['Firma sencilla'];
-        foreach ($types as $type) {
+        foreach (($template['SignType'] ?? ['Firma sencilla']) as $type) {
             $s = $signature;
             $s['Type'] = $type;
             $signatures[] = $s;
         }
         return $signatures;
+    }
+
+    /**
+     * SOLICITUD — multi-signer. Each tier template already carries its internal
+     * approver chain (names, emails, positions, order) plus ONE empty-email
+     * "DIRECTOR DE LINEA" slot. We send every UserSigns entry verbatim (keeping
+     * its position/order) and fill only that empty slot with the service line
+     * director. One signature per signer (templates set numFirmas=1), Type = the
+     * document's first allowed SignType.
+     *
+     * NOTE: with no vendor reference payload, one-signature-per-signer and the
+     * first-SignType choice are the best-supported reading of the template
+     * (numFirmas=1, a single position per entry). Verify against a live
+     * Contisign test before go-live — both assumptions are isolated here.
+     */
+    private function solicitudSignatures(array $template, array $payload): array
+    {
+        $director  = $this->serviceDirector($payload['service'] ?? null);
+        $type      = $template['SignType'][0] ?? 'Firma sencilla';
+        $limitDate = now()->addDays(30)->toIso8601String();
+
+        $signatures = [];
+        foreach (($template['UserSigns'] ?? []) as $userSign) {
+            $sig = $userSign;
+
+            // The dynamic slot is the one UserSigns entry with no email.
+            if (trim((string) ($userSign['Email'] ?? '')) === '') {
+                $sig['Name']        = $director['name'] ?? ($userSign['Name'] ?? '');
+                $sig['Email']       = $director['email'] ?? '';
+                $sig['PhoneNumber'] = (string) ($director['phone'] ?? '');
+                $sig['phone']       = (string) ($director['phone'] ?? '');
+                if (isset($sig['AditionalInformation']) && is_array($sig['AditionalInformation'])) {
+                    $sig['AditionalInformation']['name'] = $sig['Name'];
+                }
+            } else {
+                $sig['phone'] = (string) ($userSign['PhoneNumber'] ?? '');
+            }
+
+            $sig['LimitDate'] = $limitDate;
+            $sig['Status']    = $userSign['Status'] ?? 'Pendiente';
+            $sig['Type']      = $type;
+            $signatures[] = $sig;
+        }
+        return $signatures;
+    }
+
+    /** Resolve the service → line-director signer, with a safe fallback. */
+    private function serviceDirector(?string $service): array
+    {
+        $map = config('contisign.service_line_directors', []);
+        return $map[$service]
+            ?? config('contisign.service_line_director_default', ['name' => '', 'email' => '', 'phone' => '']);
     }
 
     /* ----------------------------------------------------------------
