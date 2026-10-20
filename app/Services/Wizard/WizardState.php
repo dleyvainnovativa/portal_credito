@@ -212,6 +212,56 @@ class WizardState
         $this->markCreditThresholdAsked();
     }
 
+    /* ----------------------------------------------------------------
+     | Privacy-notice acceptance evidence
+     | ----------------------------------------------------------------
+     | LFPDPPP / Aviso Integral §6 require keeping record of the accepted
+     | version plus date and time. Stored in its own session bag and surfaced
+     | by PayloadMapper. Timestamps are captured once (first acceptance).
+     */
+
+    /** All stored privacy-acceptance evidence. */
+    public function privacy(): array
+    {
+        return $this->bag()['privacy'] ?? [];
+    }
+
+    /** Record the intake-sheet acceptances (Simplificado + optional/financial). */
+    public function setPrivacyIntake(
+        bool $privacyAccept,
+        bool $marketingOptOut,
+        bool $financialConsent,
+        bool $isOver300k,
+    ): void {
+        $priv = $this->privacy();
+        $priv['aviso_version'] = config('privacy.version');
+
+        if ($privacyAccept) {
+            $priv['simplificado_accepted']    = true;
+            $priv['simplificado_accepted_at'] = $priv['simplificado_accepted_at'] ?? now()->toIso8601String();
+        }
+
+        $priv['marketing_opt_out'] = $marketingOptOut;
+
+        // The art.7 financial consent only applies to the ">$300,000" tier.
+        $priv['financial_consent']    = $isOver300k ? $financialConsent : false;
+        $priv['financial_consent_at'] = ($isOver300k && $financialConsent)
+            ? ($priv['financial_consent_at'] ?? now()->toIso8601String())
+            : null;
+
+        $this->put('privacy', $priv);
+    }
+
+    /** Record acceptance of the Aviso Integral on the review step. */
+    public function setIntegralAccepted(): void
+    {
+        $priv = $this->privacy();
+        $priv['aviso_version']        = $priv['aviso_version'] ?? config('privacy.version');
+        $priv['integral_accepted']    = true;
+        $priv['integral_accepted_at'] = now()->toIso8601String();
+        $this->put('privacy', $priv);
+    }
+
     public function completedSteps(): array
     {
         return $this->bag()['completed'] ?? [];

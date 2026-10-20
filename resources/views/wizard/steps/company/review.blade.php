@@ -8,4 +8,5 @@ config('documents.credit_over_threshold', []),
 ['id_front' => 'Front Image', 'id_back' => 'Back Image']
 ),
 ])
+@include('partials.legal.integral-accept')
 @include('wizard.steps.shared.confirm-submit')

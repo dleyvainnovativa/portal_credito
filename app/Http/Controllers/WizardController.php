@@ -143,11 +143,31 @@ class WizardController extends Controller
         $validated = $request->validate([
             'credit_range'        => ['required', \Illuminate\Validation\Rule::in(WizardState::CREDIT_RANGES)],
             'service_to_contract' => ['nullable', \Illuminate\Validation\Rule::in(array_keys(config('contisign.service_line_directors', [])))],
+            'privacy_accept'      => ['accepted'],
+            'marketing_opt_out'   => ['nullable', 'boolean'],
+            'financial_consent'   => ['nullable', 'boolean'],
         ]);
+
+        $isOver300k = $validated['credit_range'] === 'over_300k';
+
+        // Art.7 financial consent is obligatory for the ">$300,000" tier.
+        if ($isOver300k && ! $request->boolean('financial_consent')) {
+            return response()->json([
+                'ok'     => false,
+                'errors' => ['financial_consent' => __('Required for a credit line over $300,000.')],
+            ], 422);
+        }
 
         $this->state->setIntake(
             $validated['credit_range'],
             $validated['service_to_contract'] ?? null,
+        );
+
+        $this->state->setPrivacyIntake(
+            privacyAccept: true, // the 'accepted' rule guarantees this
+            marketingOptOut: $request->boolean('marketing_opt_out'),
+            financialConsent: $request->boolean('financial_consent'),
+            isOver300k: $isOver300k,
         );
 
         return response()->json(['ok' => true]);
@@ -350,12 +370,17 @@ class WizardController extends Controller
                 ->with('warning', __('Please complete all steps before submitting.'));
         }
 
-        // Explicit confirmation is required.
+        // Explicit confirmation + Aviso Integral acceptance are required.
         $request->validate([
-            'confirm_submission' => ['accepted'],
+            'confirm_submission'       => ['accepted'],
+            'aviso_integral_accepted'  => ['accepted'],
         ], [
-            'confirm_submission.accepted' => __('You must confirm the information before submitting.'),
+            'confirm_submission.accepted'      => __('You must confirm the information before submitting.'),
+            'aviso_integral_accepted.accepted' => __('You must accept the Aviso de Privacidad Integral before submitting.'),
         ]);
+
+        // Record acceptance evidence (version + timestamp) before building payload.
+        $this->state->setIntegralAccepted();
 
         $payload = app(\App\Services\Payload\PayloadMapper::class)->build();
 

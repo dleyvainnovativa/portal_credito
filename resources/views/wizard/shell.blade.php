@@ -184,6 +184,9 @@
         const submitBtn = sheet.querySelector('[data-credit-sheet-submit]');
         const service   = sheet.querySelector('[data-credit-sheet-service]');
         const ranges    = sheet.querySelectorAll('input[name="credit_range"]');
+        const optout    = sheet.querySelector('[data-credit-sheet-optout]');
+        const financial     = sheet.querySelector('[data-credit-sheet-financial]');
+        const financialWrap = sheet.querySelector('[data-credit-sheet-financial-wrap]');
         let lastFocus = null;
 
         const open = () => {
@@ -233,14 +236,29 @@
 
         // --- Validation gates ----------------------------------------------
         const selectedRange = () => sheet.querySelector('input[name="credit_range"]:checked');
+        const isOver300k = () => {
+            const r = selectedRange();
+            return !!r && r.dataset.creditOver === '1';
+        };
+        // Show the art.7 financial consent only for the ">$300,000" tier.
+        const syncFinancial = () => {
+            if (!financialWrap) return;
+            const show = isOver300k();
+            financialWrap.hidden = !show;
+            if (!show && financial) financial.checked = false; // reset when hidden
+        };
         const refreshNext = () => { if (nextBtn) nextBtn.disabled = !(privacy && privacy.checked); };
         const refreshSubmit = () => {
-            if (submitBtn) submitBtn.disabled = !(selectedRange() && service && service.value);
+            if (!submitBtn) return;
+            const ok = selectedRange() && service && service.value
+                && (!isOver300k() || (financial && financial.checked));
+            submitBtn.disabled = !ok;
         };
 
         privacy?.addEventListener('change', refreshNext);
-        ranges.forEach((r) => r.addEventListener('change', refreshSubmit));
+        ranges.forEach((r) => r.addEventListener('change', () => { syncFinancial(); refreshSubmit(); }));
         service?.addEventListener('change', refreshSubmit);
+        financial?.addEventListener('change', refreshSubmit);
 
         nextBtn?.addEventListener('click', () => { if (privacy && privacy.checked) show('credit'); });
         backBtn?.addEventListener('click', () => show('privacy'));
@@ -250,10 +268,14 @@
             if (settled) return;
             const range = selectedRange();
             if (!range || !service || !service.value) return;
+            if (isOver300k() && !(financial && financial.checked)) return;
             settled = true;
             post({
                 credit_range: range.value,
                 service_to_contract: service.value,
+                privacy_accept: (privacy && privacy.checked) ? 1 : 0,
+                marketing_opt_out: (optout && optout.checked) ? 1 : 0,
+                financial_consent: (financial && financial.checked) ? 1 : 0,
             });
             hide();
         });
@@ -266,13 +288,16 @@
         sheet.addEventListener('keydown', (e) => {
             if (e.key !== 'Tab' || sheet.hidden) return;
             const current = steps.privacy && !steps.privacy.hidden ? steps.privacy : steps.credit;
-            const f = current.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled])');
+            const f = Array.from(
+                current.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled])')
+            ).filter((el) => el.offsetParent !== null); // visible only (skip hidden consent)
             if (!f.length) return;
             const first = f[0], last = f[f.length - 1];
             if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
             else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
 
+        syncFinancial();
         refreshNext();
         refreshSubmit();
         open();

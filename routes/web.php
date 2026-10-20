@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WizardController::class, 'start'])->name('wizard.start');
 Route::post('/onboarding/begin', [WizardController::class, 'begin'])->name('wizard.begin');
 
+// Public: full "Aviso de Privacidad Integral" page (opened in a new tab from
+// the intake sheet, satisfying the "vínculo al aviso integral" required up
+// front; the same content is also shown inline on the review step).
+Route::view('/aviso-de-privacidad', 'legal.aviso-integral-page')->name('legal.aviso-integral');
+
 // Postal code lookup (read-only JSON, consumed by the address step).
 Route::get('/postal/{code}', [PostalCodeController::class, 'show'])
     ->where('code', '\d{5}')

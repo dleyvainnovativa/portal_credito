@@ -56,6 +56,24 @@ class PayloadMapper
             // signer. Both live in the credit-docs step data.
             'credit_range'   => $this->creditRange(),
             'service'        => $this->service(),
+            // Privacy-notice acceptance evidence (version + timestamps).
+            'privacy'        => $this->privacy(),
+        ];
+    }
+
+    /** Privacy-notice acceptance evidence for the submission/record. */
+    private function privacy(): array
+    {
+        $p = $this->state->privacy();
+        return [
+            'aviso_version'            => $p['aviso_version'] ?? config('privacy.version'),
+            'simplificado_accepted'    => (bool) ($p['simplificado_accepted'] ?? false),
+            'simplificado_accepted_at' => $p['simplificado_accepted_at'] ?? null,
+            'integral_accepted'        => (bool) ($p['integral_accepted'] ?? false),
+            'integral_accepted_at'     => $p['integral_accepted_at'] ?? null,
+            'marketing_opt_out'        => (bool) ($p['marketing_opt_out'] ?? false),
+            'financial_consent'        => (bool) ($p['financial_consent'] ?? false),
+            'financial_consent_at'     => $p['financial_consent_at'] ?? null,
         ];
     }
 

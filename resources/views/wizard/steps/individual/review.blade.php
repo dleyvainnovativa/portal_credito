@@ -8,4 +8,5 @@ config('documents.required.individual', []),
 config('documents.credit_over_threshold', [])
 ),
 ])
+@include('partials.legal.integral-accept')
 @include('wizard.steps.shared.confirm-submit')

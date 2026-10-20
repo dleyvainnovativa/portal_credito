@@ -43,13 +43,21 @@
             </span>
 
             <h2 class="ob-sheet__title" id="credit-sheet-title">
-                {{ __('Privacy Notice') }}
+                {{ __('Aviso de Privacidad') }}
             </h2>
 
-            <p class="ob-sheet__desc">
-                {{ __('To continue, you must accept the Privacy Notice.') }}
+            {{-- Simplificado content, verbatim, in a scrollable box. --}}
+            <div class="ob-legal-box">
+                @include('partials.legal.aviso-simplificado')
+            </div>
+
+            <p class="ob-sheet__legal-link">
+                <a href="{{ route('legal.aviso-integral') }}" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-up-right-from-square me-1" aria-hidden="true"></i>{{ __('Consultar el Aviso de Privacidad Integral') }}
+                </a>
             </p>
 
+            {{-- Casilla #1 — obligatoria: covers both avisos. Gates "Continuar". --}}
             <label class="ob-check" for="privacy_accept">
                 <input class="ob-check__input" type="checkbox" value="1"
                     id="privacy_accept" name="privacy_accept"
@@ -58,8 +66,23 @@
                     <i class="fa-solid fa-check"></i>
                 </span>
                 <span class="ob-check__label">
-                    {{ __('I have read and accept the') }}
-                    <a href="{{ config('branding.privacy_url', '#') }}" target="_blank" rel="noopener">{{ __('Privacy Notice') }}</a>.
+                    He leído y acepto el Aviso de Privacidad Simplificado y el
+                    <a href="{{ route('legal.aviso-integral') }}" target="_blank" rel="noopener">Aviso de Privacidad Integral</a>
+                    de Sistemas Contino. <span class="ob-check__req">({{ __('Obligatoria') }})</span>
+                </span>
+            </label>
+
+            {{-- Casilla #3 — opcional: marketing opt-out. --}}
+            <label class="ob-check ob-check--sm" for="marketing_opt_out">
+                <input class="ob-check__input" type="checkbox" value="1"
+                    id="marketing_opt_out" name="marketing_opt_out"
+                    data-credit-sheet-optout>
+                <span class="ob-check__box" aria-hidden="true">
+                    <i class="fa-solid fa-check"></i>
+                </span>
+                <span class="ob-check__label">
+                    No deseo que mis datos se utilicen para envío de promociones, encuestas ni estudios de mercado.
+                    <span class="ob-check__opt">({{ __('Opcional') }})</span>
                 </span>
             </label>
 
@@ -127,11 +150,28 @@
                     <option value="computo">Cómputo</option>
                     <option value="impresion">Impresión</option>
                     <option value="redes">Redes</option>
+                    <option value="cyberseguridad">Cyberseguridad</option>
                     <option value="datacenter">Datacenter</option>
-                    <option value="ciberseguridad">Ciberseguridad</option>
                     <option value="gestion_documental">Gestión Documental</option>
                 </select>
             </div>
+
+            {{-- Casilla #2 — obligatoria, only for ">$300,000": express consent
+                 to treat financial/patrimonial data (art. 7 LFPDPPP). Revealed
+                 by the sheet script when "Más de $300,000" is selected; while
+                 visible it gates "Continuar". --}}
+            <label class="ob-check ob-check--sm" for="financial_consent"
+                data-credit-sheet-financial-wrap hidden>
+                <input class="ob-check__input" type="checkbox" value="1"
+                    id="financial_consent" name="financial_consent"
+                    data-credit-sheet-financial>
+                <span class="ob-check__box" aria-hidden="true">
+                    <i class="fa-solid fa-check"></i>
+                </span>
+                <span class="ob-check__label">
+                    Otorgo mi consentimiento expreso para el tratamiento de mis datos financieros y patrimoniales para las finalidades primarias señaladas, en términos del artículo 7 de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares. <span class="ob-check__req">({{ __('Obligatoria') }})</span>
+                </span>
+            </label>
 
             <div class="ob-sheet__actions">
                 <button type="button" class="btn btn-outline-secondary ob-sheet__btn"

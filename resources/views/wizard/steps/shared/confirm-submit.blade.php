@@ -19,14 +19,17 @@
 
 @push('scripts')
 <script type="module">
-    // Enable the submit button only once the confirmation box is checked.
+    // Enable the submit button only once BOTH the confirmation box and the
+    // Aviso de Privacidad Integral acceptance are checked.
     const confirm = document.querySelector('[data-ob-confirm]');
+    const integral = document.querySelector('[data-ob-integral-accept]');
     const submit = document.getElementById('ob-next-btn');
     if (confirm && submit) {
         const sync = () => {
-            submit.disabled = !confirm.checked;
+            submit.disabled = !(confirm.checked && (!integral || integral.checked));
         };
         confirm.addEventListener('change', sync);
+        integral?.addEventListener('change', sync);
         sync();
     }
 </script>
