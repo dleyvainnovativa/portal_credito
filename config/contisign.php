@@ -133,15 +133,15 @@ return [
     | line directors. 'phone' matters because the templates set requireSMS=true.
     */
     'service_line_directors' => [
-        'computo'            => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
-        'impresion'          => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
-        'redes'              => ['name' => 'Daniel Redes', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
-        'cyberseguridad'     => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
-        'datacenter'         => ['name' => 'Daniel Datacenter', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
-        'gestion_documental' => ['name' => 'Daniel', 'email' => 'gestion.documental@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'computo'            => ['name' => 'Juan Antonio Martínez', 'email' => 'jamartinez@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'impresion'          => ['name' => 'Manuel Hernández', 'email' => 'mhernandez@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'redes'              => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'cyberseguridad'     => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'datacenter'         => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'gestion_documental' => ['name' => 'Gerardo Poo', 'email' => 'gpooa@sistemascontino.com.mx', 'phone' => '2299000000'],
     ],
 
     // Used when service is missing/unknown so the slot is never left empty.
-    'service_line_director_default' => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+    'service_line_director_default' => ['name' => 'Angel Samuel Chavez', 'email' => 'gestion.documental@sistemascontino.com.mx', 'phone' => '2299000000'],
 
 ];
