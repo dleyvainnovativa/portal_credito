@@ -148,10 +148,11 @@ class WizardController extends Controller
             'financial_consent'   => ['nullable', 'boolean'],
         ]);
 
-        $isOver300k = $validated['credit_range'] === 'over_300k';
+        $requiresFinancial = WizardState::rangeRequiresExtraDocs($validated['credit_range']);
 
-        // Art.7 financial consent is obligatory for the ">$300,000" tier.
-        if ($isOver300k && ! $request->boolean('financial_consent')) {
+        // Art.7 financial consent is obligatory for the tiers that collect
+        // financial docs (>$300,000).
+        if ($requiresFinancial && ! $request->boolean('financial_consent')) {
             return response()->json([
                 'ok'     => false,
                 'errors' => ['financial_consent' => __('Required for a credit line over $300,000.')],
@@ -167,7 +168,7 @@ class WizardController extends Controller
             privacyAccept: true, // the 'accepted' rule guarantees this
             marketingOptOut: $request->boolean('marketing_opt_out'),
             financialConsent: $request->boolean('financial_consent'),
-            isOver300k: $isOver300k,
+            requiresFinancial: $requiresFinancial,
         );
 
         return response()->json(['ok' => true]);

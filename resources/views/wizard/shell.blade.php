@@ -236,14 +236,16 @@
 
         // --- Validation gates ----------------------------------------------
         const selectedRange = () => sheet.querySelector('input[name="credit_range"]:checked');
-        const isOver300k = () => {
+        // True for the tiers that collect financial docs (any tier flagged
+        // data-credit-over="1" — currently "300k–2m" and "más de 2 millones").
+        const requiresFinancialConsent = () => {
             const r = selectedRange();
             return !!r && r.dataset.creditOver === '1';
         };
-        // Show the art.7 financial consent only for the ">$300,000" tier.
+        // Show the art.7 financial consent only for those tiers.
         const syncFinancial = () => {
             if (!financialWrap) return;
-            const show = isOver300k();
+            const show = requiresFinancialConsent();
             financialWrap.hidden = !show;
             if (!show && financial) financial.checked = false; // reset when hidden
         };
@@ -251,7 +253,7 @@
         const refreshSubmit = () => {
             if (!submitBtn) return;
             const ok = selectedRange() && service && service.value
-                && (!isOver300k() || (financial && financial.checked));
+                && (!requiresFinancialConsent() || (financial && financial.checked));
             submitBtn.disabled = !ok;
         };
 
@@ -268,7 +270,7 @@
             if (settled) return;
             const range = selectedRange();
             if (!range || !service || !service.value) return;
-            if (isOver300k() && !(financial && financial.checked)) return;
+            if (requiresFinancialConsent() && !(financial && financial.checked)) return;
             settled = true;
             post({
                 credit_range: range.value,

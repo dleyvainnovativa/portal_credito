@@ -5,10 +5,10 @@
 <div class="mb-2">
     <h2 class="h6 fw-bold mb-3">{{ __('Credit Authorization') }}</h2>
 
-    <p>Términos y condiciones, cláusulas de medios electrónicos tales como NIP.
-        Autorizo expresamente a <a class="fw-bold" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Dun & Bradstreet, S.A. SIC.</a>, para que lleve a cabo investigaciones sobre mi comportamiento Crediticio en las Sociedades de Información Crediticia (SIC), y otras fuentes de información que estime conveniente. Conozco la naturaleza y alcance de la información que se solicitará, el uso que se le dará, que la misma podrá ser trasladada a terceros, y que se podrán realizar consultas periódicas sobre mi historial y otras fuentes. Consiento que esta autorización tenga una vigencia de 3 años contados a partir de hoy, y en su caso mientras mantengamos relación jurídica.</p>
+    <!-- <p>Términos y condiciones, cláusulas de medios electrónicos tales como NIP. -->
+    <!-- Autorizo expresamente a <a class="fw-bold" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Dun & Bradstreet, S.A. SIC.</a>, para que lleve a cabo investigaciones sobre mi comportamiento Crediticio en las Sociedades de Información Crediticia (SIC), y otras fuentes de información que estime conveniente. Conozco la naturaleza y alcance de la información que se solicitará, el uso que se le dará, que la misma podrá ser trasladada a terceros, y que se podrán realizar consultas periódicas sobre mi historial y otras fuentes. Consiento que esta autorización tenga una vigencia de 3 años contados a partir de hoy, y en su caso mientras mantengamos relación jurídica.</p> -->
 
-    <p>Acepto que este documento quede bajo propiedad de <a class="fw-bold" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Dun & Bradstreet, S.A. SIC.</a></p>
+    <!-- <p>Acepto que este documento quede bajo propiedad de <a class="fw-bold" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Dun & Bradstreet, S.A. SIC.</a></p> -->
     <!-- <p>Autorizo expresamente a <a class="fw-bold" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Sistemas Contino, S.A. de C.V.</a> para consultar mi historial crediticio en sociedades de información crediticia, a fin de evaluar mi solicitud.</p> -->
 
     <div class="form-check p-3 rounded"

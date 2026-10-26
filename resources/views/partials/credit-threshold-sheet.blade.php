@@ -133,9 +133,17 @@
 
                 <label class="ob-choice">
                     <input class="ob-choice__input" type="radio" name="credit_range"
-                        value="over_300k" data-credit-over="1">
+                        value="300k_2m" data-credit-over="1">
                     <span class="ob-choice__box">
-                        <span class="ob-choice__label">{{ __('More than $300,000') }}</span>
+                        <span class="ob-choice__label">Más de 300,000 menos de 2 millones</span>
+                    </span>
+                </label>
+
+                <label class="ob-choice">
+                    <input class="ob-choice__input" type="radio" name="credit_range"
+                        value="over_2m" data-credit-over="1">
+                    <span class="ob-choice__box">
+                        <span class="ob-choice__label">Más de 2 millones</span>
                     </span>
                 </label>
             </fieldset>

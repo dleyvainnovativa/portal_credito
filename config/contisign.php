@@ -12,8 +12,8 @@
 return [
 
     // Auth and API share the same base URL (dev = api.contisign...).
-    // 'base_url' => env('CONTISIGN_BASE_URL', 'https://api.contisign.com.mx'),
-    'base_url' => env('CONTISIGN_BASE_URL', 'https://apidev.contisign.com.mx'),
+    'base_url' => env('CONTISIGN_BASE_URL', 'https://api.contisign.com.mx'),
+    // 'base_url' => env('CONTISIGN_BASE_URL', 'https://apidev.contisign.com.mx'),
 
     'credentials' => [
         'email'    => env('CONTISIGN_EMAIL'),
@@ -97,7 +97,8 @@ return [
     |
     |   under_150k → 3 signers  (Yiselle, Silvana, Director de Línea)
     |   150k_300k  → 4 signers  (+ Enrique Arellano)
-    |   over_300k  → 5 signers  (+ Luis Manuel Rodríguez) and the 4 extra docs
+    |   300k_2m    → 5 signers  (+ Luis Manuel Rodríguez) and the 4 extra docs
+    |   over_2m    → 6 signers  (+ Gerardo Poo Gil)        and the 4 extra docs
     */
     'solicitud_templates' => [
         'under_150k' => [
@@ -110,10 +111,15 @@ return [
             'name'      => '00.SOLICITUD DE CRÉDITO de 150,000 a 300,000',
             'json_path' => 'contisign/templates/solicitud_150_300.json',
         ],
-        'over_300k' => [
-            'id'        => env('CONTISIGN_TPL_SOLICITUD_MAS300_ID', '3a6f1b17-ea65-4721-9a8c-15e5ff911e4b'),
+        '300k_2m' => [
+            'id'        => env('CONTISIGN_TPL_SOLICITUD_300A2M_ID', '3a6f1b17-ea65-4721-9a8c-15e5ff911e4b'),
             'name'      => '00.SOLICITUD DE CRÉDITO más de 300,000',
             'json_path' => 'contisign/templates/solicitud_mas_300.json',
+        ],
+        'over_2m' => [
+            'id'        => env('CONTISIGN_TPL_SOLICITUD_MAS2M_ID', '76a9756f-ec09-496f-a300-823619bd4ccc'),
+            'name'      => '00.SOLICITUD DE CRÉDITO más de 2,000,000',
+            'json_path' => 'contisign/templates/solicitud_mas_2m.json',
         ],
     ],
 

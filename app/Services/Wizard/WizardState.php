@@ -190,15 +190,25 @@ class WizardState
         return $this->type() === 'company' ? 'documents' : 'identification';
     }
 
-    /** Valid credit-line ranges (the three intake-sheet options). */
-    public const CREDIT_RANGES = ['under_150k', '150k_300k', 'over_300k'];
+    /** Valid credit-line ranges (the four intake-sheet options). */
+    public const CREDIT_RANGES = ['under_150k', '150k_300k', '300k_2m', 'over_2m'];
+
+    /** Ranges that require the 4 extra financial documents (and the art.7
+     *  financial consent). Both top tiers do; each targets a different template. */
+    public const CREDIT_RANGES_WITH_EXTRA_DOCS = ['300k_2m', 'over_2m'];
+
+    /** Does this range require the 4 extra financial docs / financial consent? */
+    public static function rangeRequiresExtraDocs(string $range): bool
+    {
+        return in_array($range, self::CREDIT_RANGES_WITH_EXTRA_DOCS, true);
+    }
 
     /**
      * Persist the intake-sheet answers into the credit-docs step data, where
      * that step's view and FormRequest read them from. The credit_over_threshold
-     * flag is DERIVED from the range (only the top tier triggers the extra docs
-     * and the "más de 300,000" template), so the range stays the single source
-     * of truth. The service drives the dynamic solicitud signer.
+     * flag is DERIVED from the range (the two top tiers trigger the extra docs
+     * and their own solicitud template), so the range stays the single source of
+     * truth. The service drives the dynamic solicitud signer.
      */
     public function setIntake(string $range, ?string $service): void
     {
@@ -207,7 +217,7 @@ class WizardState
         $this->setStepData($this->creditDocsStepKey(), [
             'credit_range'          => $range,
             'service_to_contract'   => $service,
-            'credit_over_threshold' => $range === 'over_300k',
+            'credit_over_threshold' => self::rangeRequiresExtraDocs($range),
         ]);
         $this->markCreditThresholdAsked();
     }
@@ -231,7 +241,7 @@ class WizardState
         bool $privacyAccept,
         bool $marketingOptOut,
         bool $financialConsent,
-        bool $isOver300k,
+        bool $requiresFinancial,
     ): void {
         $priv = $this->privacy();
         $priv['aviso_version'] = config('privacy.version');
@@ -243,9 +253,10 @@ class WizardState
 
         $priv['marketing_opt_out'] = $marketingOptOut;
 
-        // The art.7 financial consent only applies to the ">$300,000" tier.
-        $priv['financial_consent']    = $isOver300k ? $financialConsent : false;
-        $priv['financial_consent_at'] = ($isOver300k && $financialConsent)
+        // The art.7 financial consent only applies to the tiers that collect
+        // financial docs (>$300,000).
+        $priv['financial_consent']    = $requiresFinancial ? $financialConsent : false;
+        $priv['financial_consent_at'] = ($requiresFinancial && $financialConsent)
             ? ($priv['financial_consent_at'] ?? now()->toIso8601String())
             : null;
 
