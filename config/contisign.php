@@ -12,7 +12,8 @@
 return [
 
     // Auth and API share the same base URL (dev = api.contisign...).
-    'base_url' => env('CONTISIGN_BASE_URL', 'https://api.contisign.com.mx'),
+    // 'base_url' => env('CONTISIGN_BASE_URL', 'https://api.contisign.com.mx'),
+    'base_url' => env('CONTISIGN_BASE_URL', 'https://apidev.contisign.com.mx'),
 
     'credentials' => [
         'email'    => env('CONTISIGN_EMAIL'),
@@ -131,7 +132,7 @@ return [
         'redes'              => ['name' => 'Daniel Redes', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
         'cyberseguridad'     => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
         'datacenter'         => ['name' => 'Daniel Datacenter', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
-        'gestion_documental' => ['name' => 'Daniel', 'email' => 'dancaballerodlc@gmail.com', 'phone' => '2299000000'],
+        'gestion_documental' => ['name' => 'Daniel', 'email' => 'gestion.documental@sistemascontino.com.mx', 'phone' => '2299000000'],
     ],
 
     // Used when service is missing/unknown so the slot is never left empty.
