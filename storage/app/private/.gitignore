@@ -1,2 +1,5 @@
-*
-!.gitignore
+# Ignore temporary uploads
+/onboarding/tmp/
+
+# Ignore macOS metadata
+.DS_Store
