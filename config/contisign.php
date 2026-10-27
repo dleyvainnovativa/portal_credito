@@ -143,7 +143,7 @@ return [
         'redes'              => ['name' => 'Elias Castellanos Gonzalez', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
         'cyberseguridad'     => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
         'datacenter'         => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
-        'gestion_documental' => ['name' => 'Gerardo Poo Alvarez', 'email' => 'achavez@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'gestion_documental' => ['name' => 'Gerardo Poo Alvarez', 'email' => 'gpooa@sistemascontino.com.mx', 'phone' => '2299000000'],
     ],
 
     // Used when service is missing/unknown so the slot is never left empty.
