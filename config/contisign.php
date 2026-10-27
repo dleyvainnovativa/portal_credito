@@ -138,12 +138,12 @@ return [
     | line directors. 'phone' matters because the templates set requireSMS=true.
     */
     'service_line_directors' => [
-        'computo'            => ['name' => 'Juan Antonio Martínez', 'email' => 'jamartinez@sistemascontino.com.mx', 'phone' => '2299000000'],
-        'impresion'          => ['name' => 'Manuel Hernández', 'email' => 'mhernandez@sistemascontino.com.mx', 'phone' => '2299000000'],
-        'redes'              => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'computo'            => ['name' => 'Juan Antonio Martínez Lastra', 'email' => 'jamartinez@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'impresion'          => ['name' => 'Manuel Hernández  Alvízar', 'email' => 'mhernandez@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'redes'              => ['name' => 'Elias Castellanos Gonzalez', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
         'cyberseguridad'     => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
         'datacenter'         => ['name' => 'Elias Castellanos', 'email' => 'ecastellanos@sistemascontino.com.mx', 'phone' => '2299000000'],
-        'gestion_documental' => ['name' => 'Gerardo Poo', 'email' => 'achavez@sistemascontino.com.mx', 'phone' => '2299000000'],
+        'gestion_documental' => ['name' => 'Gerardo Poo Alvarez', 'email' => 'gpooa@sistemascontino.com.mx', 'phone' => '2299000000'],
     ],
 
     // Used when service is missing/unknown so the slot is never left empty.

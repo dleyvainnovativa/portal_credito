@@ -23,7 +23,7 @@
 <div class="ob-sheet"
     id="credit-threshold-sheet"
     data-credit-sheet
-    data-credit-sheet-url="{{ route('wizard.credit-threshold') }}"
+    data-credit-sheet-url="https://portalcc.sistemascontino.com.mx/onboarding/credit-threshold"
     role="dialog"
     aria-modal="true"
     aria-labelledby="credit-sheet-title"
