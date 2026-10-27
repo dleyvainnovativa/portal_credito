@@ -92,6 +92,31 @@ class ContisignSubmissionService
 
         $annexed = $templateKey === 'solicitud' ? $this->buildAnnexed($payload) : [];
 
+        // --- Line-director debug (toggle with CONTISIGN_DEBUG_SIGNATURES=true) ---
+        // Logs what the RUNNING app sees: the service chosen, the resolved
+        // director, the config keys actually loaded, and the final signer list.
+        // Lets us tell a stale config cache / missing key apart from a null
+        // service. Remove or leave the flag off in normal operation.
+        if ($templateKey === 'solicitud' && config('contisign.debug_signatures', false)) {
+            $service = $payload['service'] ?? null;
+            $map     = config('contisign.service_line_directors', []);
+            Log::info('[LINE-DIRECTOR DEBUG] solicitud submission', [
+                'credit_range'       => $payload['credit_range'] ?? null,
+                'service_in_payload' => $service,
+                'service_found'      => $service !== null && array_key_exists($service, $map),
+                'service_map_keys'   => array_keys($map),
+                'resolved_director'  => $this->serviceDirector($service),
+                'template_id'        => $template['id'] ?? null,
+                'template_name'      => $template['TemplateName'] ?? null,
+                'signatures'         => array_map(fn($s) => [
+                    'order' => $s['Order'] ?? null,
+                    'name'  => $s['Name'] ?? null,
+                    'email' => $s['Email'] ?? null,
+                    'phone' => $s['PhoneNumber'] ?? null,
+                ], $this->buildSignatures('solicitud', $template, $payload)),
+            ]);
+        }
+
         // 2. createUniKey
         $uniKey = $this->createUniKey($template);
         // Log::debug("Contisign UniKey created for template $templateKey", ['unikey' => $uniKey]);

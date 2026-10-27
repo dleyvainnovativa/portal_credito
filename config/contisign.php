@@ -35,6 +35,11 @@ return [
     'send_filled_html' => env('CONTISIGN_SEND_FILLED_HTML', false),
     'strip_accents'    => env('CONTISIGN_STRIP_ACCENTS', false),
 
+    // When true, logs the resolved line-director + full signer list on each
+    // solicitud submission (see ContisignSubmissionService::submitTemplate).
+    // For diagnosing signer wiring in prod; leave false in normal operation.
+    'debug_signatures' => env('CONTISIGN_DEBUG_SIGNATURES', false),
+
     'endpoints' => [
         'signin'        => '/api/auth/signin',
         'refresh'       => '/api/auth/refreshToken',
@@ -142,6 +147,6 @@ return [
     ],
 
     // Used when service is missing/unknown so the slot is never left empty.
-    'service_line_director_default' => ['name' => 'Angel Samuel Chavez', 'email' => 'gestion.documental@sistemascontino.com.mx', 'phone' => '2299000000'],
+    'service_line_director_default' => ['name' => 'Angel Samuel', 'email' => 'gestion.documental@sistemascontino.com.mx', 'phone' => '2299000000'],
 
 ];
