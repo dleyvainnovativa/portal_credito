@@ -310,7 +310,6 @@ class ContisignSubmissionService
         foreach (($template['SignType'] ?? ['Firma autógrafa']) as $type) {
             $s = $signature;
             $s['Type'] = $type;
-            $s['Type'] = 'Firma autógrafa';
             $signatures[] = $s;
         }
         return $signatures;
