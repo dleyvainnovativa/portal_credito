@@ -1,884 +1,884 @@
 {
-  "id": "76a9756f-ec09-496f-a300-823619bd4ccc",
-  "signOrdered": true,
-  "checkEdition": false,
-  "positionRequired": true,
-  "postCommentsRequired": false,
-  "WithoutInitialPage": false,
-  "OnlyNOM151": false,
-  "Active": true,
-  "Fields": [
-    {
-      "order": 0,
-      "variable": "fecha",
-      "description": "Fecha de solicitud",
-      "autocomplete": "",
-      "showlist": "",
-      "tooltip": "Fecha de hoy",
-      "dataType": "date",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 1,
-      "variable": "nombre",
-      "description": "Nombre del cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 2,
-      "variable": "ncmcl",
-      "description": "Nombre comercial",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 3,
-      "variable": "stwb",
-      "description": "Sitio web",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 4,
-      "variable": "domicilio",
-      "description": "Domicilio de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 5,
-      "variable": "colonia",
-      "description": "Colonia de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 6,
-      "variable": "ciudad",
-      "description": "Ciudad de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 7,
-      "variable": "estado",
-      "description": "Estado de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 8,
-      "variable": "cpostal",
-      "description": "Código postal de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 9,
-      "variable": "rfc",
-      "description": "RFC de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 10,
-      "variable": "email",
-      "description": "E-mail de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 11,
-      "variable": "telefono",
-      "description": "Teléfono de cliente/razón social",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 12,
-      "variable": "giro",
-      "description": "Giro del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 13,
-      "variable": "antigu",
-      "description": "Antigüedad del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 14,
-      "variable": "domicilion",
-      "description": "Domicilio del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 15,
-      "variable": "colonian",
-      "description": "Colonia del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 16,
-      "variable": "ciudadn",
-      "description": "Ciudad del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 17,
-      "variable": "estadon",
-      "description": "Estado del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 18,
-      "variable": "cpostaln",
-      "description": "Código postal del negocio",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 19,
-      "variable": "empresa",
-      "description": "Empresa de empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 20,
-      "variable": "puesto",
-      "description": "Puesto de empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 21,
-      "variable": "telemp",
-      "description": "Teléfono de empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 22,
-      "variable": "antemp",
-      "description": "Antigüedad en el empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 23,
-      "variable": "jdemp",
-      "description": "Jefe directo del empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 24,
-      "variable": "domicmp",
-      "description": "Domicilio del empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 25,
-      "variable": "colemp",
-      "description": "Colonia del empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 26,
-      "variable": "ciuemp",
-      "description": "Ciudad del empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 27,
-      "variable": "estemp",
-      "description": "Estado del empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 28,
-      "variable": "cpemp",
-      "description": "Código postal del empleo actual",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 29,
-      "variable": "emprov1",
-      "description": "Empresa de proveedor 1",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 30,
-      "variable": "telprov1",
-      "description": "Teléfono de proveedor 1",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 31,
-      "variable": "cmprov2",
-      "description": "Empresa de proveedor 2",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 32,
-      "variable": "tclprov2",
-      "description": "Teléfono de proveedor 2",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 33,
-      "variable": "cmprov3",
-      "description": "Empresa de proveedor 3",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 34,
-      "variable": "telprov3",
-      "description": "Teléfono de proveedor 3",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "number",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 35,
-      "variable": "ejventas",
-      "description": "Correo del ejecutivo",
-      "autocomplete": "",
-      "showlist": "",
-      "dataType": "text",
-      "lists": "",
-      "unique": false,
-      "separate": false
-    },
-    {
-      "order": 36,
-      "variable": "fecha"
-    },
-    {
-      "order": 37,
-      "variable": "nombre"
-    },
-    {
-      "order": 38,
-      "variable": "ncmcl"
-    },
-    {
-      "order": 39,
-      "variable": "stwb"
-    },
-    {
-      "order": 40,
-      "variable": "domicilio"
-    },
-    {
-      "order": 41,
-      "variable": "colonia"
-    },
-    {
-      "order": 42,
-      "variable": "ciudad"
-    },
-    {
-      "order": 43,
-      "variable": "estado"
-    },
-    {
-      "order": 44,
-      "variable": "cpostal"
-    },
-    {
-      "order": 45,
-      "variable": "rfc"
-    },
-    {
-      "order": 46,
-      "variable": "email"
-    },
-    {
-      "order": 47,
-      "variable": "telefono"
-    },
-    {
-      "order": 48,
-      "variable": "giro"
-    },
-    {
-      "order": 49,
-      "variable": "antigu"
-    },
-    {
-      "order": 50,
-      "variable": "domicilion"
-    },
-    {
-      "order": 51,
-      "variable": "colonian"
-    },
-    {
-      "order": 52,
-      "variable": "ciudadn"
-    },
-    {
-      "order": 53,
-      "variable": "estadon"
-    },
-    {
-      "order": 54,
-      "variable": "cpostaln"
-    },
-    {
-      "order": 55,
-      "variable": "empresa"
-    },
-    {
-      "order": 56,
-      "variable": "puesto"
-    },
-    {
-      "order": 57,
-      "variable": "telemp"
-    },
-    {
-      "order": 58,
-      "variable": "antemp"
-    },
-    {
-      "order": 59,
-      "variable": "jdemp"
-    },
-    {
-      "order": 60,
-      "variable": "domicmp"
-    },
-    {
-      "order": 61,
-      "variable": "colemp"
-    },
-    {
-      "order": 62,
-      "variable": "ciuemp"
-    },
-    {
-      "order": 63,
-      "variable": "estemp"
-    },
-    {
-      "order": 64,
-      "variable": "cpemp"
-    },
-    {
-      "order": 65,
-      "variable": "emprov1"
-    },
-    {
-      "order": 66,
-      "variable": "telprov1"
-    },
-    {
-      "order": 67,
-      "variable": "cmprov2"
-    },
-    {
-      "order": 68,
-      "variable": "tclprov2"
-    },
-    {
-      "order": 69,
-      "variable": "cmprov3"
-    },
-    {
-      "order": 70,
-      "variable": "telprov3"
-    },
-    {
-      "order": 71,
-      "variable": "ejventas"
+    "id": "76a9756f-ec09-496f-a300-823619bd4ccc",
+    "signOrdered": true,
+    "checkEdition": false,
+    "positionRequired": true,
+    "postCommentsRequired": false,
+    "WithoutInitialPage": false,
+    "OnlyNOM151": false,
+    "Active": true,
+    "Fields": [
+        {
+            "order": 0,
+            "variable": "fecha",
+            "description": "Fecha de solicitud",
+            "autocomplete": "",
+            "showlist": "",
+            "tooltip": "Fecha de hoy",
+            "dataType": "date",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 1,
+            "variable": "nombre",
+            "description": "Nombre del cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 2,
+            "variable": "ncmcl",
+            "description": "Nombre comercial",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 3,
+            "variable": "stwb",
+            "description": "Sitio web",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 4,
+            "variable": "domicilio",
+            "description": "Domicilio de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 5,
+            "variable": "colonia",
+            "description": "Colonia de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 6,
+            "variable": "ciudad",
+            "description": "Ciudad de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 7,
+            "variable": "estado",
+            "description": "Estado de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 8,
+            "variable": "cpostal",
+            "description": "Código postal de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 9,
+            "variable": "rfc",
+            "description": "RFC de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 10,
+            "variable": "email",
+            "description": "E-mail de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 11,
+            "variable": "telefono",
+            "description": "Teléfono de cliente/razón social",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 12,
+            "variable": "giro",
+            "description": "Giro del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 13,
+            "variable": "antigu",
+            "description": "Antigüedad del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 14,
+            "variable": "domicilion",
+            "description": "Domicilio del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 15,
+            "variable": "colonian",
+            "description": "Colonia del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 16,
+            "variable": "ciudadn",
+            "description": "Ciudad del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 17,
+            "variable": "estadon",
+            "description": "Estado del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 18,
+            "variable": "cpostaln",
+            "description": "Código postal del negocio",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 19,
+            "variable": "empresa",
+            "description": "Empresa de empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 20,
+            "variable": "puesto",
+            "description": "Puesto de empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 21,
+            "variable": "telemp",
+            "description": "Teléfono de empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 22,
+            "variable": "antemp",
+            "description": "Antigüedad en el empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 23,
+            "variable": "jdemp",
+            "description": "Jefe directo del empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 24,
+            "variable": "domicmp",
+            "description": "Domicilio del empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 25,
+            "variable": "colemp",
+            "description": "Colonia del empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 26,
+            "variable": "ciuemp",
+            "description": "Ciudad del empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 27,
+            "variable": "estemp",
+            "description": "Estado del empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 28,
+            "variable": "cpemp",
+            "description": "Código postal del empleo actual",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 29,
+            "variable": "emprov1",
+            "description": "Empresa de proveedor 1",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 30,
+            "variable": "telprov1",
+            "description": "Teléfono de proveedor 1",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 31,
+            "variable": "cmprov2",
+            "description": "Empresa de proveedor 2",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 32,
+            "variable": "tclprov2",
+            "description": "Teléfono de proveedor 2",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 33,
+            "variable": "cmprov3",
+            "description": "Empresa de proveedor 3",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 34,
+            "variable": "telprov3",
+            "description": "Teléfono de proveedor 3",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "number",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 35,
+            "variable": "ejventas",
+            "description": "Correo del ejecutivo",
+            "autocomplete": "",
+            "showlist": "",
+            "dataType": "text",
+            "lists": "",
+            "unique": false,
+            "separate": false
+        },
+        {
+            "order": 36,
+            "variable": "fecha"
+        },
+        {
+            "order": 37,
+            "variable": "nombre"
+        },
+        {
+            "order": 38,
+            "variable": "ncmcl"
+        },
+        {
+            "order": 39,
+            "variable": "stwb"
+        },
+        {
+            "order": 40,
+            "variable": "domicilio"
+        },
+        {
+            "order": 41,
+            "variable": "colonia"
+        },
+        {
+            "order": 42,
+            "variable": "ciudad"
+        },
+        {
+            "order": 43,
+            "variable": "estado"
+        },
+        {
+            "order": 44,
+            "variable": "cpostal"
+        },
+        {
+            "order": 45,
+            "variable": "rfc"
+        },
+        {
+            "order": 46,
+            "variable": "email"
+        },
+        {
+            "order": 47,
+            "variable": "telefono"
+        },
+        {
+            "order": 48,
+            "variable": "giro"
+        },
+        {
+            "order": 49,
+            "variable": "antigu"
+        },
+        {
+            "order": 50,
+            "variable": "domicilion"
+        },
+        {
+            "order": 51,
+            "variable": "colonian"
+        },
+        {
+            "order": 52,
+            "variable": "ciudadn"
+        },
+        {
+            "order": 53,
+            "variable": "estadon"
+        },
+        {
+            "order": 54,
+            "variable": "cpostaln"
+        },
+        {
+            "order": 55,
+            "variable": "empresa"
+        },
+        {
+            "order": 56,
+            "variable": "puesto"
+        },
+        {
+            "order": 57,
+            "variable": "telemp"
+        },
+        {
+            "order": 58,
+            "variable": "antemp"
+        },
+        {
+            "order": 59,
+            "variable": "jdemp"
+        },
+        {
+            "order": 60,
+            "variable": "domicmp"
+        },
+        {
+            "order": 61,
+            "variable": "colemp"
+        },
+        {
+            "order": 62,
+            "variable": "ciuemp"
+        },
+        {
+            "order": 63,
+            "variable": "estemp"
+        },
+        {
+            "order": 64,
+            "variable": "cpemp"
+        },
+        {
+            "order": 65,
+            "variable": "emprov1"
+        },
+        {
+            "order": 66,
+            "variable": "telprov1"
+        },
+        {
+            "order": 67,
+            "variable": "cmprov2"
+        },
+        {
+            "order": 68,
+            "variable": "tclprov2"
+        },
+        {
+            "order": 69,
+            "variable": "cmprov3"
+        },
+        {
+            "order": 70,
+            "variable": "telprov3"
+        },
+        {
+            "order": 71,
+            "variable": "ejventas"
+        }
+    ],
+    "Templates": "<figure class=\"table\"><table style=\"border:1px solid hsl(0, 0%, 100%);\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:100px;\"><img class=\"image_resized\" style=\"width:97.52%;\" src=\"https://api.contisign.com.mx/files/annexed/1791916357442_1791916357303.png\"></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:395px;\"><p style=\"text-align:center;\"><strong>SOLICITUD DE CRÉDITO</strong></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:100px;\">&nbsp;</td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border:1px solid hsl(0, 0%, 100%);\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:445px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 100%);width:150px;\"><span class=\"text-small\"><strong>FECHA:</strong></span> <s>fecha</s></td></tr></tbody></table></figure><p><span class=\"text-small\"><strong>Todos los datos solicitados a continuación, serán manejados de manera confidencial</strong></span></p><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>DATOS DEL SOLICITANTE</strong></span></p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\" colspan=\"2\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>NOMBRE O RAZÓN SOCIAL:</strong></span></p><p><s>nombre</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>NOMBRE COMERCIAL:</strong></span></p><p><s>ncmcl</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>SITIO WEB:</strong></span></p><p><s>stwb</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>DOMICILIO:</strong></span></p><p><s>domicilio</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>COLONIA:</strong></span></p><p><s>colonia</s></p></td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CIUDAD:</strong></span></p><p><s>ciudad</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ESTADO:</strong></span></p><p><s>estado</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CÓDIGO POSTAL:</strong></span></p><p><s>cpostal</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>RFC:</strong></span></p><p><s>rfc</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>E-MAIL:</strong></span></p><p><s>email</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>telefono</s></p></td></tr></tbody></table></figure><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>DATOS DEL NEGOCIO</strong></span></p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>GIRO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>giro</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ANTIGÜEDAD:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>antigu</s></span></p></td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:397px;\" colspan=\"2\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>DOMICILIO:</strong></span></p><p><s>domicilion</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>COLONIA:</strong></span></p><p><s>colonian</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CIUDAD:</strong></span></p><p><s>ciudadn</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ESTADO:</strong></span></p><p><s>estadon</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CÓDIGO POSTAL:</strong></span></p><p><s>cpostaln</s></p></td></tr></tbody></table></figure><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>EMPLEO ACTUAL (SOLO PERSONAS FÍSICAS)</strong></span></p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>empresa</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>PUESTO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>puesto</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>telemp</s></span></p></td></tr></tbody></table></figure><p>&nbsp;</p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ANTIGÜEDAD:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>antemp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>JEFE DIRECTO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>jdemp</s></span></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>DOMICILIO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>domicmp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>COLONIA:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>colemp</s></span></p></td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CIUDAD:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>ciuemp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ESTADO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>estemp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CÓDIGO POSTAL:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>cpemp</s></span></p></td></tr></tbody></table></figure><p>&nbsp;</p><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>REFERENCIAS DE PROVEEDORES</strong></span></p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><s>emprov1</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>telprov1</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><s>cmprov2</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>tclprov2</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><s>cmprov3</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>telprov3</s></p></td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>LÍNEA DE CRÉDITO SOLICITADA:</strong></p><p style=\"text-align:justify;\"><span class=\"text-small\">CERTIFICO QUE LOS DATOS AQUÍ ASENTADOS SON VERÍDICOS, Y ESTOY CONSCIENTE QUE CUALQUIER ERROR O DATO INCIERTO CAUSARÁ DEMORA O CANCELACIÓN DE LA PRESENTE SOLICITUD. SI MI SOLICITUD ES APROBADA ME SUJETARÉ A LAS CONDICIONES ANOTADAS EN EL PEDIDO Y A LAS POLÍTICAS DE CRÉDITO QUE LA EMPRESA SISTEMAS CONTINO SA DE CV TIENE ESTABLECIDAS</span></p><figure class=\"table\"><table style=\"border:1px solid hsl(0, 0%, 100%);\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,0%);\"><s>ejventas</s></span></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>EJECUTIVO DE VENTAS</strong></span></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>(Nombre y firma)</strong></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><s>nombre</s></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>CLIENTE</strong></span></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>(Nombre y firma)</strong></span></p></td></tr></tbody></table></figure><p>&nbsp;</p>",
+    "FileMetadata": {
+        "dimensions": {
+            "width": 612,
+            "height": 792,
+            "totalPages": 2
+        }
+    },
+    "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1792799265936.pdf",
+    "TemplateName": "00.SOLICITUD DE CRÉDITO más de 2,000,000",
+    "Category": "Ventas,Crédito y cobranza",
+    "Grouped": null,
+    "Annexed": [
+        "CONSTANCIA DE SITUACIÓN FISCAL (RFC)",
+        "COMPROBANTE DE DOMICILIO",
+        "IDENTIFICACIÓN REPRESENTANTE LEGAL DELANTERA",
+        "IDENTIFICACIÓN REPRESENTANTE LEGAL TRASERA",
+        "CARTA DE AUTORIZACIÓN DE BURÓ",
+        "ACTA CONSTITUTIVA ",
+        "ACTA DE PODERES",
+        "ESTADOS FINANCIEROS",
+        "1° DECLARACION SAT",
+        "2° DECLARACION SAT"
+    ],
+    "AnnexedQuantity": 10,
+    "AnnexedOptional": false,
+    "PSCreq": false,
+    "SignType": [
+        "Firma sencilla",
+        "Firma autógrafa"
+    ],
+    "UserSigns": [
+        {
+            "Name": "YISELLE HERNÁNDEZ PUIG",
+            "Email": "yiselleh@sistemascontino.com.mx",
+            "Charge": "Signed",
+            "Position": "Gerente de Cumplimiento Legal",
+            "BusinessName": " ",
+            "PhoneNumber": "1234567890",
+            "Order": 1,
+            "external": false,
+            "RfcValidationRequired": false,
+            "ExpectedRFC": null,
+            "bgColor": "a8bb49",
+            "x": 14,
+            "y": 593,
+            "width": 99,
+            "height": 35,
+            "page": 1,
+            "documentPageNum": 1,
+            "AditionalInformation": {
+                "xNorm": 0.02274809160305344,
+                "yNorm": 0.7492913385826772,
+                "wNorm": 0.16112857356683127,
+                "hNorm": 0.04443052572973833,
+                "page": 1,
+                "x": 14,
+                "y": 593,
+                "width": 99,
+                "height": 35,
+                "name": "YISELLE HERNÁNDEZ PUIG",
+                "bgcolor": "#a8bb4999",
+                "dimensions": {
+                    "w": 612,
+                    "h": 1584,
+                    "pageHeight": 792,
+                    "pages": 2,
+                    "pdfWidthPt": 612,
+                    "pdfHeightPt": 792
+                }
+            },
+            "dimension": {
+                "w": 612,
+                "h": 792,
+                "pageHeight": 792,
+                "pages": 2
+            },
+            "numFirmas": 1
+        },
+        {
+            "Name": "Guadalupe Silvana Lorenzo Muñoz",
+            "Email": "silvanal@sistemascontino.com.mx",
+            "Charge": "Signed",
+            "Position": " ",
+            "BusinessName": " ",
+            "PhoneNumber": "2299581884",
+            "Order": 2,
+            "external": false,
+            "RfcValidationRequired": false,
+            "ExpectedRFC": null,
+            "bgColor": "bae749",
+            "x": 161,
+            "y": 593,
+            "width": 100,
+            "height": 36,
+            "page": 1,
+            "documentPageNum": 1,
+            "AditionalInformation": {
+                "xNorm": 0.263206106870229,
+                "yNorm": 0.7492913385826772,
+                "wNorm": 0.1636731028289178,
+                "hNorm": 0.045414777698242266,
+                "page": 1,
+                "x": 161,
+                "y": 593,
+                "width": 100,
+                "height": 36,
+                "name": "Guadalupe Silvana Lorenzo Muñoz",
+                "bgcolor": "#bae74999",
+                "dimensions": {
+                    "w": 612,
+                    "h": 1584,
+                    "pageHeight": 792,
+                    "pages": 2,
+                    "pdfWidthPt": 612,
+                    "pdfHeightPt": 792
+                }
+            },
+            "dimension": {
+                "w": 612,
+                "h": 792,
+                "pageHeight": 792,
+                "pages": 2
+            },
+            "numFirmas": 1
+        },
+        {
+            "Name": "DIRECTOR DE LINEA",
+            "Email": "",
+            "Charge": "Signed",
+            "Position": "",
+            "BusinessName": "",
+            "PhoneNumber": "",
+            "Order": 3,
+            "external": false,
+            "RfcValidationRequired": false,
+            "ExpectedRFC": null,
+            "bgColor": "2605aa",
+            "x": 307,
+            "y": 592,
+            "width": 99,
+            "height": 38,
+            "page": 1,
+            "documentPageNum": 1,
+            "AditionalInformation": {
+                "xNorm": 0.501119592875318,
+                "yNorm": 0.7473228346456693,
+                "wNorm": 0.16112857356683127,
+                "hNorm": 0.04836753360375408,
+                "page": 1,
+                "x": 307,
+                "y": 592,
+                "width": 99,
+                "height": 38,
+                "name": "DIRECTOR DE LINEA",
+                "bgcolor": "#2605aa99",
+                "dimensions": {
+                    "w": 612,
+                    "h": 1584,
+                    "pageHeight": 792,
+                    "pages": 2,
+                    "pdfWidthPt": 612,
+                    "pdfHeightPt": 792
+                }
+            },
+            "dimension": {
+                "w": 612,
+                "h": 792,
+                "pageHeight": 792,
+                "pages": 2
+            },
+            "numFirmas": 1
+        },
+        {
+            "Name": "Enrique Arellano Ayala",
+            "Email": "earellano@sistemascontino.com.mx",
+            "Charge": "Signed",
+            "Position": "Gerente de Finanzas y Soporte a la Operación",
+            "BusinessName": " ",
+            "PhoneNumber": "2291614684",
+            "Order": 4,
+            "external": false,
+            "RfcValidationRequired": false,
+            "ExpectedRFC": null,
+            "bgColor": "378507",
+            "x": 469,
+            "y": 589,
+            "width": 108,
+            "height": 39,
+            "page": 1,
+            "documentPageNum": 1,
+            "AditionalInformation": {
+                "xNorm": 0.7657506361323155,
+                "yNorm": 0.7433858267716535,
+                "wNorm": 0.17639574913935038,
+                "hNorm": 0.049351785572258014,
+                "page": 1,
+                "x": 469,
+                "y": 589,
+                "width": 108,
+                "height": 39,
+                "name": "Enrique Arellano Ayala",
+                "bgcolor": "#37850799",
+                "dimensions": {
+                    "w": 612,
+                    "h": 1584,
+                    "pageHeight": 792,
+                    "pages": 2,
+                    "pdfWidthPt": 612,
+                    "pdfHeightPt": 792
+                }
+            },
+            "dimension": {
+                "w": 612,
+                "h": 792,
+                "pageHeight": 792,
+                "pages": 2
+            },
+            "numFirmas": 1
+        },
+        {
+            "Name": "Luis Manuel Rodriguez Tavizon",
+            "Email": "lmrodriguezt@sistemascontino.com.mx",
+            "Charge": "Signed",
+            "Position": "Director Ejecutivo",
+            "BusinessName": " ",
+            "PhoneNumber": "1234567890",
+            "Order": 5,
+            "external": false,
+            "RfcValidationRequired": false,
+            "ExpectedRFC": null,
+            "bgColor": "77f540",
+            "x": 128,
+            "y": 706,
+            "width": 99,
+            "height": 23,
+            "page": 1,
+            "documentPageNum": 1,
+            "AditionalInformation": {
+                "xNorm": 0.2097709923664122,
+                "yNorm": 0.892007874015748,
+                "wNorm": 0.16112857356683127,
+                "hNorm": 0.02952755905511811,
+                "page": 1,
+                "x": 128,
+                "y": 706,
+                "width": 99,
+                "height": 23,
+                "name": "Luis Manuel Rodriguez Tavizon",
+                "bgcolor": "#77f54099",
+                "dimensions": {
+                    "w": 612,
+                    "h": 1584,
+                    "pageHeight": 792,
+                    "pages": 2,
+                    "pdfWidthPt": 612,
+                    "pdfHeightPt": 792
+                }
+            },
+            "dimension": {
+                "w": 612,
+                "h": 792,
+                "pageHeight": 792,
+                "pages": 2
+            },
+            "numFirmas": 1
+        },
+        {
+            "Name": "Gerardo Poo Gil",
+            "Email": "gpoo@sistemascontino.com.mx",
+            "Charge": "Signed",
+            "Position": " ",
+            "BusinessName": " ",
+            "PhoneNumber": "2291614584",
+            "Order": 6,
+            "external": false,
+            "RfcValidationRequired": false,
+            "ExpectedRFC": null,
+            "bgColor": "194fe7",
+            "x": 369,
+            "y": 705,
+            "width": 86,
+            "height": 34,
+            "page": 1,
+            "documentPageNum": 1,
+            "AditionalInformation": {
+                "xNorm": 0.6029007633587786,
+                "yNorm": 0.8900393700787401,
+                "wNorm": 0.14077233947013917,
+                "hNorm": 0.043446273761234395,
+                "page": 1,
+                "x": 369,
+                "y": 705,
+                "width": 86,
+                "height": 34,
+                "name": "Gerardo Poo Gil",
+                "bgcolor": "#194fe799",
+                "dimensions": {
+                    "w": 612,
+                    "h": 1584,
+                    "pageHeight": 792,
+                    "pages": 2,
+                    "pdfWidthPt": 612,
+                    "pdfHeightPt": 792
+                }
+            },
+            "dimension": {
+                "w": 612,
+                "h": 792,
+                "pageHeight": 792,
+                "pages": 2
+            },
+            "numFirmas": 1
+        }
+    ],
+    "ShowQR": false,
+    "Status": null,
+    "allowBulkUpload": false,
+    "AllowDownloadDocumento": true,
+    "requireSMS": false,
+    "FilePath": "previewFile/1792795954651.pdf",
+    "created_at": "2026-10-23T22:56:43.472Z",
+    "updated_at": "2026-10-23T23:47:58.671Z",
+    "personid": "f9259884-3919-41b5-b19e-a72d7e1cc691",
+    "file": {
+        "base64": "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",
+        "mimetype": "application/pdf",
+        "size": 5348,
+        "name": "1792795954651.pdf",
+        "url": "https://api.contisign.com.mx/files/previewFile/1792795954651.pdf"
     }
-  ],
-  "Templates": "<figure class=\"table\"><table style=\"border:1px solid hsl(0, 0%, 100%);\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:100px;\"><img class=\"image_resized\" style=\"width:97.52%;\" src=\"https://api.contisign.com.mx/files/annexed/1791916357442_1791916357303.png\"></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:395px;\"><p style=\"text-align:center;\"><strong>SOLICITUD DE CRÉDITO</strong></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:100px;\">&nbsp;</td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border:1px solid hsl(0, 0%, 100%);\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:445px;\">&nbsp;</td><td style=\"border:1px solid hsl(0, 0%, 100%);width:150px;\"><span class=\"text-small\"><strong>FECHA:</strong></span> <s>fecha</s></td></tr></tbody></table></figure><p><span class=\"text-small\"><strong>Todos los datos solicitados a continuación, serán manejados de manera confidencial</strong></span></p><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>DATOS DEL SOLICITANTE</strong></span></p><figure class=\"table\"><table><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:595px;\" colspan=\"2\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>NOMBRE O RAZÓN SOCIAL:</strong></span></p><p><s>nombre</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>NOMBRE COMERCIAL:</strong></span></p><p><s>ncmcl</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>SITIO WEB:</strong></span></p><p><s>stwb</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>DOMICILIO:</strong></span></p><p><s>domicilio</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>COLONIA:</strong></span></p><p><s>colonia</s></p></td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CIUDAD:</strong></span></p><p><s>ciudad</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ESTADO:</strong></span></p><p><s>estado</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CÓDIGO POSTAL:</strong></span></p><p><s>cpostal</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>RFC:</strong></span></p><p><s>rfc</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>E-MAIL:</strong></span></p><p><s>email</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>telefono</s></p></td></tr></tbody></table></figure><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>DATOS DEL NEGOCIO</strong></span></p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>GIRO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>giro</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ANTIGÜEDAD:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>antigu</s></span></p></td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:397px;\" colspan=\"2\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>DOMICILIO:</strong></span></p><p><s>domicilion</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>COLONIA:</strong></span></p><p><s>colonian</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CIUDAD:</strong></span></p><p><s>ciudadn</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ESTADO:</strong></span></p><p><s>estadon</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CÓDIGO POSTAL:</strong></span></p><p><s>cpostaln</s></p></td></tr></tbody></table></figure><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>EMPLEO ACTUAL (SOLO PERSONAS FÍSICAS)</strong></span></p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>empresa</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>PUESTO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>puesto</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>telemp</s></span></p></td></tr></tbody></table></figure><p>&nbsp;</p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ANTIGÜEDAD:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>antemp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>JEFE DIRECTO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>jdemp</s></span></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>DOMICILIO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>domicmp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>COLONIA:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>colemp</s></span></p></td></tr></tbody></table></figure><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CIUDAD:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>ciuemp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:199px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>ESTADO:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>estemp</s></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:198px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>CÓDIGO POSTAL:</strong></span></p><p><span style=\"color:hsl(0,0%,100%);\"><s>cpemp</s></span></p></td></tr></tbody></table></figure><p>&nbsp;</p><p><span style=\"background-color:hsl(0,0%,0%);color:hsl(0,0%,100%);\"><strong>REFERENCIAS DE PROVEEDORES</strong></span></p><figure class=\"table\"><table style=\"border-style:solid;border-width:2px;\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><s>emprov1</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>telprov1</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><s>cmprov2</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>tclprov2</s></p></td></tr><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>EMPRESA:</strong></span></p><p><s>cmprov3</s></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p><span class=\"text-small\" style=\"color:hsl(0,0%,30%);\"><strong>TELÉFONO:</strong></span></p><p><s>telprov3</s></p></td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>LÍNEA DE CRÉDITO SOLICITADA:</strong></p><p style=\"text-align:justify;\"><span class=\"text-small\">CERTIFICO QUE LOS DATOS AQUÍ ASENTADOS SON VERÍDICOS, Y ESTOY CONSCIENTE QUE CUALQUIER ERROR O DATO INCIERTO CAUSARÁ DEMORA O CANCELACIÓN DE LA PRESENTE SOLICITUD. SI MI SOLICITUD ES APROBADA ME SUJETARÉ A LAS CONDICIONES ANOTADAS EN EL PEDIDO Y A LAS POLÍTICAS DE CRÉDITO QUE LA EMPRESA SISTEMAS CONTINO SA DE CV TIENE ESTABLECIDAS</span></p><figure class=\"table\"><table style=\"border:1px solid hsl(0, 0%, 100%);\"><tbody><tr><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,0%);\"><s>ejventas</s></span></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>EJECUTIVO DE VENTAS</strong></span></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>(Nombre y firma)</strong></span></p></td><td style=\"border:1px solid hsl(0, 0%, 100%);width:297.5px;\"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><s>nombre</s></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>CLIENTE</strong></span></p><p style=\"text-align:center;\"><span style=\"color:hsl(0,0%,30%);\"><strong>(Nombre y firma)</strong></span></p></td></tr></tbody></table></figure><p>&nbsp;</p>",
-  "FileMetadata": {
-    "dimensions": {
-      "width": 612,
-      "height": 792,
-      "totalPages": 2
-    }
-  },
-  "ImageUrl": "https://api.contisign.com.mx/files/previewFile/1792799265936.pdf",
-  "TemplateName": "00.SOLICITUD DE CRÉDITO más de 2,000,000",
-  "Category": "Ventas,Crédito y cobranza",
-  "Grouped": null,
-  "Annexed": [
-    "CONSTANCIA DE SITUACIÓN FISCAL (RFC)",
-    "COMPROBANTE DE DOMICILIO",
-    "IDENTIFICACIÓN REPRESENTANTE LEGAL DELANTERA",
-    "IDENTIFICACIÓN REPRESENTANTE LEGAL TRASERA",
-    "CARTA DE AUTORIZACIÓN DE BURÓ",
-    "ACTA CONSTITUTIVA ",
-    "ACTA DE PODERES",
-    "ESTADOS FINANCIEROS",
-    "1° DECLARACION SAT",
-    "2° DECLARACION SAT"
-  ],
-  "AnnexedQuantity": 10,
-  "AnnexedOptional": false,
-  "PSCreq": false,
-  "SignType": [
-    "Firma sencilla",
-    "Firma autógrafa"
-  ],
-  "UserSigns": [
-    {
-      "Name": "YISELLE HERNÁNDEZ PUIG",
-      "Email": "yiselleh@sistemascontino.com.mx",
-      "Charge": "Signed",
-      "Position": "Gerente de Cumplimiento Legal",
-      "BusinessName": " ",
-      "PhoneNumber": "1234567890",
-      "Order": 1,
-      "external": false,
-      "RfcValidationRequired": false,
-      "ExpectedRFC": null,
-      "bgColor": "a8bb49",
-      "x": 14,
-      "y": 593,
-      "width": 99,
-      "height": 35,
-      "page": 1,
-      "documentPageNum": 1,
-      "AditionalInformation": {
-        "xNorm": 0.02274809160305344,
-        "yNorm": 0.7492913385826772,
-        "wNorm": 0.16112857356683127,
-        "hNorm": 0.04443052572973833,
-        "page": 1,
-        "x": 14,
-        "y": 593,
-        "width": 99,
-        "height": 35,
-        "name": "YISELLE HERNÁNDEZ PUIG",
-        "bgcolor": "#a8bb4999",
-        "dimensions": {
-          "w": 612,
-          "h": 1584,
-          "pageHeight": 792,
-          "pages": 2,
-          "pdfWidthPt": 612,
-          "pdfHeightPt": 792
-        }
-      },
-      "dimension": {
-        "w": 612,
-        "h": 792,
-        "pageHeight": 792,
-        "pages": 2
-      },
-      "numFirmas": 1
-    },
-    {
-      "Name": "Guadalupe Silvana Lorenzo Muñoz",
-      "Email": "silvanal@sistemascontino.com.mx",
-      "Charge": "Signed",
-      "Position": " ",
-      "BusinessName": " ",
-      "PhoneNumber": "2299581884",
-      "Order": 2,
-      "external": false,
-      "RfcValidationRequired": false,
-      "ExpectedRFC": null,
-      "bgColor": "bae749",
-      "x": 161,
-      "y": 593,
-      "width": 100,
-      "height": 36,
-      "page": 1,
-      "documentPageNum": 1,
-      "AditionalInformation": {
-        "xNorm": 0.263206106870229,
-        "yNorm": 0.7492913385826772,
-        "wNorm": 0.1636731028289178,
-        "hNorm": 0.045414777698242266,
-        "page": 1,
-        "x": 161,
-        "y": 593,
-        "width": 100,
-        "height": 36,
-        "name": "Guadalupe Silvana Lorenzo Muñoz",
-        "bgcolor": "#bae74999",
-        "dimensions": {
-          "w": 612,
-          "h": 1584,
-          "pageHeight": 792,
-          "pages": 2,
-          "pdfWidthPt": 612,
-          "pdfHeightPt": 792
-        }
-      },
-      "dimension": {
-        "w": 612,
-        "h": 792,
-        "pageHeight": 792,
-        "pages": 2
-      },
-      "numFirmas": 1
-    },
-    {
-      "Name": "DIRECTOR DE LINEA",
-      "Email": "",
-      "Charge": "Signed",
-      "Position": "",
-      "BusinessName": "",
-      "PhoneNumber": "",
-      "Order": 3,
-      "external": false,
-      "RfcValidationRequired": false,
-      "ExpectedRFC": null,
-      "bgColor": "2605aa",
-      "x": 307,
-      "y": 592,
-      "width": 99,
-      "height": 38,
-      "page": 1,
-      "documentPageNum": 1,
-      "AditionalInformation": {
-        "xNorm": 0.501119592875318,
-        "yNorm": 0.7473228346456693,
-        "wNorm": 0.16112857356683127,
-        "hNorm": 0.04836753360375408,
-        "page": 1,
-        "x": 307,
-        "y": 592,
-        "width": 99,
-        "height": 38,
-        "name": "DIRECTOR DE LINEA",
-        "bgcolor": "#2605aa99",
-        "dimensions": {
-          "w": 612,
-          "h": 1584,
-          "pageHeight": 792,
-          "pages": 2,
-          "pdfWidthPt": 612,
-          "pdfHeightPt": 792
-        }
-      },
-      "dimension": {
-        "w": 612,
-        "h": 792,
-        "pageHeight": 792,
-        "pages": 2
-      },
-      "numFirmas": 1
-    },
-    {
-      "Name": "Enrique Arellano Ayala",
-      "Email": "gestion.documental@sistemascontino.com.mx",
-      "Charge": "Signed",
-      "Position": "Gerente de Finanzas y Soporte a la Operación",
-      "BusinessName": " ",
-      "PhoneNumber": "2291614684",
-      "Order": 4,
-      "external": false,
-      "RfcValidationRequired": false,
-      "ExpectedRFC": null,
-      "bgColor": "378507",
-      "x": 469,
-      "y": 589,
-      "width": 108,
-      "height": 39,
-      "page": 1,
-      "documentPageNum": 1,
-      "AditionalInformation": {
-        "xNorm": 0.7657506361323155,
-        "yNorm": 0.7433858267716535,
-        "wNorm": 0.17639574913935038,
-        "hNorm": 0.049351785572258014,
-        "page": 1,
-        "x": 469,
-        "y": 589,
-        "width": 108,
-        "height": 39,
-        "name": "Enrique Arellano Ayala",
-        "bgcolor": "#37850799",
-        "dimensions": {
-          "w": 612,
-          "h": 1584,
-          "pageHeight": 792,
-          "pages": 2,
-          "pdfWidthPt": 612,
-          "pdfHeightPt": 792
-        }
-      },
-      "dimension": {
-        "w": 612,
-        "h": 792,
-        "pageHeight": 792,
-        "pages": 2
-      },
-      "numFirmas": 1
-    },
-    {
-      "Name": "Luis Manuel Rodriguez Tavizon",
-      "Email": "gestion.documental@sistemascontino.com.mx",
-      "Charge": "Signed",
-      "Position": "Director Ejecutivo",
-      "BusinessName": " ",
-      "PhoneNumber": "1234567890",
-      "Order": 5,
-      "external": false,
-      "RfcValidationRequired": false,
-      "ExpectedRFC": null,
-      "bgColor": "77f540",
-      "x": 128,
-      "y": 706,
-      "width": 99,
-      "height": 23,
-      "page": 1,
-      "documentPageNum": 1,
-      "AditionalInformation": {
-        "xNorm": 0.2097709923664122,
-        "yNorm": 0.892007874015748,
-        "wNorm": 0.16112857356683127,
-        "hNorm": 0.02952755905511811,
-        "page": 1,
-        "x": 128,
-        "y": 706,
-        "width": 99,
-        "height": 23,
-        "name": "Luis Manuel Rodriguez Tavizon",
-        "bgcolor": "#77f54099",
-        "dimensions": {
-          "w": 612,
-          "h": 1584,
-          "pageHeight": 792,
-          "pages": 2,
-          "pdfWidthPt": 612,
-          "pdfHeightPt": 792
-        }
-      },
-      "dimension": {
-        "w": 612,
-        "h": 792,
-        "pageHeight": 792,
-        "pages": 2
-      },
-      "numFirmas": 1
-    },
-    {
-      "Name": "Gerardo Poo Gil",
-      "Email": "gestion.documental@sistemascontino.com.mx",
-      "Charge": "Signed",
-      "Position": " ",
-      "BusinessName": " ",
-      "PhoneNumber": "2291614584",
-      "Order": 6,
-      "external": false,
-      "RfcValidationRequired": false,
-      "ExpectedRFC": null,
-      "bgColor": "194fe7",
-      "x": 369,
-      "y": 705,
-      "width": 86,
-      "height": 34,
-      "page": 1,
-      "documentPageNum": 1,
-      "AditionalInformation": {
-        "xNorm": 0.6029007633587786,
-        "yNorm": 0.8900393700787401,
-        "wNorm": 0.14077233947013917,
-        "hNorm": 0.043446273761234395,
-        "page": 1,
-        "x": 369,
-        "y": 705,
-        "width": 86,
-        "height": 34,
-        "name": "Gerardo Poo Gil",
-        "bgcolor": "#194fe799",
-        "dimensions": {
-          "w": 612,
-          "h": 1584,
-          "pageHeight": 792,
-          "pages": 2,
-          "pdfWidthPt": 612,
-          "pdfHeightPt": 792
-        }
-      },
-      "dimension": {
-        "w": 612,
-        "h": 792,
-        "pageHeight": 792,
-        "pages": 2
-      },
-      "numFirmas": 1
-    }
-  ],
-  "ShowQR": false,
-  "Status": null,
-  "allowBulkUpload": false,
-  "AllowDownloadDocumento": true,
-  "requireSMS": false,
-  "FilePath": "previewFile/1792795954651.pdf",
-  "created_at": "2026-10-23T22:56:43.472Z",
-  "updated_at": "2026-10-23T23:47:58.671Z",
-  "personid": "f9259884-3919-41b5-b19e-a72d7e1cc691",
-  "file": {
-    "base64": "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",
-    "mimetype": "application/pdf",
-    "size": 5348,
-    "name": "1792795954651.pdf",
-    "url": "https://api.contisign.com.mx/files/previewFile/1792795954651.pdf"
-  }
 }

@@ -307,9 +307,10 @@ class ContisignSubmissionService
         }
 
         $signatures = [];
-        foreach (($template['SignType'] ?? ['Firma sencilla']) as $type) {
+        foreach (($template['SignType'] ?? ['Firma autógrafa']) as $type) {
             $s = $signature;
             $s['Type'] = $type;
+            $s['Type'] = 'Firma autógrafa';
             $signatures[] = $s;
         }
         return $signatures;
@@ -331,7 +332,8 @@ class ContisignSubmissionService
     private function solicitudSignatures(array $template, array $payload): array
     {
         $director  = $this->serviceDirector($payload['service'] ?? null);
-        $type      = $template['SignType'][0] ?? 'Firma sencilla';
+        // $type      = $template['SignType'][0] ?? 'Firma autógrafa';
+        $type      = 'Firma autógrafa';
         $limitDate = now()->addDays(30)->toIso8601String();
 
         $signatures = [];
